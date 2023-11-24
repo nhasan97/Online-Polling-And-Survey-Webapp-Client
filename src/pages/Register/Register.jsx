@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { BiLogoFacebook, BiLogoGoogle, BiLogoGithub } from "react-icons/bi";
-
+import { BiLogoGoogle } from "react-icons/bi";
+import useAuth from "../../hooks/useAuth";
+import { uploadImage } from "../../utilities/imageUploader";
 import {
   showAlertOnSuccess,
   showAlertOnError,
 } from "../../utilities/displaySweetAlert";
-import useAuth from "../../hooks/useAuth";
-import { uploadImage } from "../../utilities/imageUploader";
+import { saveUserData } from "../../api/authAPIs";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const Register = () => {
   const {
@@ -18,11 +19,11 @@ const Register = () => {
     reset,
   } = useForm();
   const [showPass, setShowPass] = useState(false);
-
-  const { registerWithEmailAndPassword, updateUsersProfile } = useAuth();
-
+  const { registerWithEmailAndPassword, updateUsersProfile, signInWithGoogle } =
+    useAuth();
   const navigate = useNavigate();
 
+  //==================== Register Using Email and Password ====================
   const onSubmit = async (data) => {
     try {
       const imageData = await uploadImage(data.photo[0]);
@@ -30,8 +31,9 @@ const Register = () => {
       registerWithEmailAndPassword(data.email, data.pass)
         .then(async (result) => {
           updateUsersProfile(data.name, imageData?.data?.display_url)
-            .then(() => {
-              console.log(result.user);
+            .then(async () => {
+              const dbResponse = await saveUserData(result?.user);
+              console.log(dbResponse);
               reset();
               showAlertOnSuccess("Account created successfully");
               navigate("/");
@@ -46,6 +48,23 @@ const Register = () => {
     } catch (err) {
       showAlertOnError(err.message);
     }
+  };
+
+  //================== Register using Google ==================
+  const handleRegistrationWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+
+    signInWithGoogle(provider)
+      .then(async (result) => {
+        if (result?.user?.email) {
+          const dbResponse = await saveUserData(result?.user);
+          console.log(dbResponse);
+          navigate(location?.state ? location.state : "/");
+        }
+      })
+      .catch((err) => {
+        showAlertOnError(err.code + "---" + err.message);
+      });
   };
 
   return (
@@ -164,9 +183,10 @@ const Register = () => {
             </p>
             <p className="text-xl font-medium">Or sign in with</p>
             <div className="flex justify-center items-center gap-6 text-xl">
-              <BiLogoFacebook className=" border-2 border-black rounded-full w-8 h-8"></BiLogoFacebook>
-              <BiLogoGoogle className=" border-2 border-black rounded-full w-8 h-8"></BiLogoGoogle>
-              <BiLogoGithub className=" border-2 border-black rounded-full w-8 h-8"></BiLogoGithub>
+              <BiLogoGoogle
+                className=" border-2 border-black rounded-full w-8 h-8"
+                onClick={handleRegistrationWithGoogle}
+              ></BiLogoGoogle>
             </div>
           </div>
         </div>

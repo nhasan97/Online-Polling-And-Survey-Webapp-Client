@@ -1,22 +1,25 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { BiLogoFacebook, BiLogoGoogle, BiLogoGithub } from "react-icons/bi";
+import { BiLogoGoogle } from "react-icons/bi";
 import {
   showAlertOnError,
   showAlertOnSuccess,
 } from "../../utilities/displaySweetAlert";
 import useAuth from "../../hooks/useAuth";
+import { GoogleAuthProvider } from "firebase/auth";
+import { saveUserData } from "../../api/authAPIs";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const [showPass, setShowPass] = useState(false);
-  const { loginWithEmailAndPassword } = useAuth();
+  const { loginWithEmailAndPassword, signInWithGoogle } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
+  //==================== Login Using Email and Password ====================
   const onSubmit = (data) => {
     loginWithEmailAndPassword(data.email, data.pass)
       .then((result) => {
@@ -26,6 +29,23 @@ const Login = () => {
       })
       .catch((err) => {
         showAlertOnError(err.code + "---------" + err.message);
+      });
+  };
+
+  //================== Login using Google ==================
+  const handleLoginWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+
+    signInWithGoogle(provider)
+      .then(async (result) => {
+        if (result?.user?.email) {
+          const dbResponse = await saveUserData(result?.user);
+          console.log(dbResponse);
+          navigate(location?.state ? location.state : "/");
+        }
+      })
+      .catch((err) => {
+        showAlertOnError(err.code + "---" + err.message);
       });
   };
 
@@ -93,9 +113,10 @@ const Login = () => {
             </p>
             <p className="text-xl font-medium">Or sign in with</p>
             <div className="flex justify-center items-center gap-6 text-xl">
-              <BiLogoFacebook className=" border-2 border-black rounded-full w-8 h-8"></BiLogoFacebook>
-              <BiLogoGoogle className=" border-2 border-black rounded-full w-8 h-8"></BiLogoGoogle>
-              <BiLogoGithub className=" border-2 border-black rounded-full w-8 h-8"></BiLogoGithub>
+              <BiLogoGoogle
+                className=" border-2 border-black rounded-full w-8 h-8"
+                onClick={handleLoginWithGoogle}
+              ></BiLogoGoogle>
             </div>
           </div>
         </div>
