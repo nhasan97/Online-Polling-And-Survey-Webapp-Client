@@ -1,13 +1,34 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { BiLogoFacebook, BiLogoGoogle, BiLogoGithub } from "react-icons/bi";
-import { useState } from "react";
+import {
+  showAlertOnError,
+  showAlertOnSuccess,
+} from "../../utilities/displaySweetAlert";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const [showPass, setShowPass] = useState(false);
+  const { loginWithEmailAndPassword } = useAuth();
 
-  const onSubmit = (data) => {};
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const onSubmit = (data) => {
+    loginWithEmailAndPassword(data.email, data.pass)
+      .then((result) => {
+        showAlertOnSuccess("Login successful");
+        console.log(result.user);
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        showAlertOnError(err.code + "---------" + err.message);
+      });
+  };
+
   return (
     <div className="w-full h-screen flex justify-center items-center bg-[url('src/assets/others/authentication.png')]">
       <div className="max-w-screen-xl mx-auto flex justify-center items-center shadow-xl py-8">
@@ -56,12 +77,6 @@ const Login = () => {
               </div>
             </label>
 
-            {/* <button className="btn" onClick={handleValidateCaptcha}>
-              validate
-            </button> */}
-
-            {/* {signUpError ? <p>{signUpError}</p> : ""} */}
-
             <input
               type="submit"
               value="Sign In"
@@ -84,8 +99,6 @@ const Login = () => {
             </div>
           </div>
         </div>
-
-        {/* <ToastContainer /> */}
       </div>
     </div>
   );

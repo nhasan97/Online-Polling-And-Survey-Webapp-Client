@@ -1,17 +1,53 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiLogoFacebook, BiLogoGoogle, BiLogoGithub } from "react-icons/bi";
+
+import {
+  showAlertOnSuccess,
+  showAlertOnError,
+} from "../../utilities/displaySweetAlert";
+import useAuth from "../../hooks/useAuth";
+import { uploadImage } from "../../utilities/imageUploader";
 
 const Register = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
   const [showPass, setShowPass] = useState(false);
 
-  const onSubmit = async (data) => {};
+  const { registerWithEmailAndPassword, updateUsersProfile } = useAuth();
+
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    try {
+      const imageData = await uploadImage(data.photo[0]);
+
+      registerWithEmailAndPassword(data.email, data.pass)
+        .then(async (result) => {
+          updateUsersProfile(data.name, imageData?.data?.display_url)
+            .then(() => {
+              console.log(result.user);
+              reset();
+              showAlertOnSuccess("Account created successfully");
+              navigate("/");
+            })
+            .catch((err) => {
+              showAlertOnError(err.code + "---------" + err.message);
+            });
+        })
+        .catch((err) => {
+          showAlertOnError(err.code + "---------" + err.message);
+        });
+    } catch (err) {
+      showAlertOnError(err.message);
+    }
+  };
+
   return (
     <div className="w-full h-screen flex justify-center items-center bg-[url('src/assets/others/authentication.png')]">
       <div className="max-w-screen-xl mx-auto flex justify-center items-center shadow-xl">
@@ -108,12 +144,9 @@ const Register = () => {
               <input
                 type="file"
                 {...register("photo")}
-                //required
                 className="file-input file-input-bordered w-full"
               />
             </div>
-
-            {/* {signUpError ? <p>{signUpError}</p> : ""} */}
 
             <input
               type="submit"
