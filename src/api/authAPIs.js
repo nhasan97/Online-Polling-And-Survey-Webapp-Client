@@ -1,4 +1,4 @@
-import axiosSecure from "./axiosSecure";
+import axiosPublic from "./axiosPublic";
 
 export const saveUserData = async (user) => {
   const currentUser = {
@@ -7,7 +7,7 @@ export const saveUserData = async (user) => {
     status: "verified",
   };
 
-  const { data } = await axiosSecure.put(`/users/${user?.email}`, currentUser);
+  const { data } = await axiosPublic.put(`/users/${user?.email}`, currentUser);
 
   return data;
 };
