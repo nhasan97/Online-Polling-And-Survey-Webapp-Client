@@ -1,10 +1,8 @@
 import useAuth from "../../hooks/useAuth";
 import { showAlertOnError } from "../../utilities/displaySweetAlert";
 import MainLogo from "../shared/mainLogo";
-
-import { GoHomeFill } from "react-icons/go";
-import SIdebarMenuItem from "./SIdebarMenuItem";
 import { useState } from "react";
+import SurveyorMenu from "./SurveyorMenu";
 
 const Sidebar = () => {
   const { user, logoutUser } = useAuth();
@@ -28,7 +26,7 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={`min-h-screen w-64 bg-[#f1f1f1] rounded-r-[36px] absolute md:fixed md:translate-x-0 ${
+        className={`w-64 min-h-screen bg-[#f1f1f1] rounded-r-[36px] absolute md:fixed z-10 md:translate-x-0 ${
           openSidebar
             ? `translate-x-0 transition duration-300 ease-in-out`
             : `-translate-x-full transition duration-300 ease-in-out`
@@ -51,17 +49,17 @@ const Sidebar = () => {
         </div>
 
         <div className="text-[#a5a5a5] py-5">
-          <SIdebarMenuItem
-            icon={<GoHomeFill></GoHomeFill>}
-            menuText="Home"
-            route="/"
-          ></SIdebarMenuItem>
+          {/* {user && user.roll === "surveyor" && (
+            <> */}
+          <SurveyorMenu></SurveyorMenu>
+          {/* </>
+          )} */}
+        </div>
 
-          <SIdebarMenuItem
-            icon={<GoHomeFill></GoHomeFill>}
-            menuText="Logout"
-            route="/"
-          ></SIdebarMenuItem>
+        <div>
+          <button className="btn" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       </div>
     </div>

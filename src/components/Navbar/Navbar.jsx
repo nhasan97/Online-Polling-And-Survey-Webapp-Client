@@ -11,6 +11,8 @@ const Navbar = () => {
   const links = (
     <div className="text-[#757575] text-base font-medium space-x-8">
       <NavLink to="/">Home</NavLink>
+      <NavLink to="/">Pro</NavLink>
+
       {user && <NavLink to="/dashboard">Dashboard</NavLink>}
     </div>
   );

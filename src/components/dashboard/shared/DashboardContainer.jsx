@@ -1,0 +1,14 @@
+import PropTypes from "prop-types";
+
+const DashboardContainer = ({ children }) => {
+  return (
+    <div className="w-full h-full flex flex-col justify-center items-center border border-blue-400">
+      {children}
+    </div>
+  );
+};
+
+DashboardContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+export default DashboardContainer;

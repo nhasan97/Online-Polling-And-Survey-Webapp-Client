@@ -4,6 +4,7 @@ import Root from "../layouts/Root";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import DashboardLayout from "../layouts/DashboardLayout";
+import CreateSurvey from "../pages/Dashboard/CreateSurvey";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,12 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashboardLayout></DashboardLayout>,
-    children: [{}],
+    children: [
+      {
+        path: "create-survey",
+        element: <CreateSurvey></CreateSurvey>,
+      },
+    ],
   },
   {
     path: "/register",
