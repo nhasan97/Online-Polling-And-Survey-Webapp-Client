@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
 import { showAlertOnError } from "../../utilities/displaySweetAlert";
 import useAuth from "../../hooks/useAuth";
+import MainLogo from "../shared/mainLogo";
 
 const Navbar = () => {
   const { user, logoutUser } = useAuth();
@@ -49,10 +50,8 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="text-xl">
-          {/* <img src={logo} alt="" className="w-[30%]" /> */}
-          <span> | name</span>
-        </a>
+
+        <MainLogo></MainLogo>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
