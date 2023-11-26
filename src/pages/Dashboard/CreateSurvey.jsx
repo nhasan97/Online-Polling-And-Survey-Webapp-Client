@@ -2,21 +2,50 @@ import DashboardContainer from "../../components/dashboard/shared/DashboardConta
 import { useForm } from "react-hook-form";
 import useCurrentDate from "../../hooks/useCurrentDate";
 import dateComparer from "../../utilities/dateComparer";
-import { showAlertOnError } from "../../utilities/displaySweetAlert";
+import {
+  showAlertOnError,
+  showAlertOnSuccess,
+} from "../../utilities/displaySweetAlert";
+import { useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { saveSurveyData } from "../../api/surveyAPIs";
 
 const CreateSurvey = () => {
   const { register, handleSubmit, reset } = useForm();
-
   const today = useCurrentDate();
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    // console.log(data);
+  const queryClient = useQueryClient();
 
+  const mutation = useMutation({
+    mutationKey: ["createSurvey"],
+    mutationFn: saveSurveyData,
+    onSuccess: () => {
+      showAlertOnSuccess("Inserted successfully!");
+      reset();
+      queryClient.invalidateQueries("createSurvey");
+      //   navigate(location?.state ? location.state : "/dashboard/surveys");
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
+  const onSubmit = async (data) => {
     const dateValidity = dateComparer(today, data.deadline);
 
     if (dateValidity === "invalid") {
       showAlertOnError("Please enter a valid date!");
     } else {
+      const survey = {
+        title: data.title,
+        description: data.description,
+        category: data.category,
+        deadline: data.deadline,
+        status: "unpublished",
+      };
+
+      mutation.mutate(survey);
     }
   };
 
