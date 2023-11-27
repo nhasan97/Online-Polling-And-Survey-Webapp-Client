@@ -1,16 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { getSurveyData, getUserBasedSurveyData } from "../../api/surveyAPIs";
+import { getUserBasedSurveyData } from "../../api/surveyAPIs";
 import { Helmet } from "react-helmet-async";
 import timeStampToDateConverter from "../../utilities/timeStampToDateConverter";
 import useAuth from "../../hooks/useAuth";
 import DashboardContainer from "../../components/dashboard/shared/DashboardContainer";
+import Loading from "../../components/shared/Loading";
 
 const DisplaySurveys = () => {
   const { user, loading } = useAuth();
 
   const {
     isLoading,
+    isFetching,
     isError,
     data: surveys,
     error,
@@ -20,8 +21,8 @@ const DisplaySurveys = () => {
     queryFn: () => getUserBasedSurveyData(user?.email),
   });
 
-  if (isLoading || loading) {
-    return <span>Loading...</span>;
+  if (isLoading || loading || isFetching) {
+    return <Loading />;
   }
 
   if (isError) {

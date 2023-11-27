@@ -41,7 +41,7 @@ const CreateSurvey = () => {
       showAlertOnSuccess("Inserted successfully!");
       reset();
       queryClient.invalidateQueries("createSurvey");
-      navigate(location?.state ? location.state : "/dashboard/display-surveys");
+      navigate(location?.state ? location.state : "/dashboard/dashboard");
     },
     onError: (error) => {
       console.log(error);
@@ -70,7 +70,7 @@ const CreateSurvey = () => {
   };
 
   if (mutation.isLoading || loading) {
-    return <span>Loading...</span>;
+    return <Loading />;
   }
 
   return (

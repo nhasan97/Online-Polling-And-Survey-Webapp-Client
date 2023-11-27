@@ -41,7 +41,7 @@ const Login = () => {
         if (result?.user?.email) {
           const dbResponse = await saveUserData(result?.user);
           console.log(dbResponse);
-          navigate(location?.state ? location.state : "/");
+          navigate(from, { replace: true });
         }
       })
       .catch((err) => {
