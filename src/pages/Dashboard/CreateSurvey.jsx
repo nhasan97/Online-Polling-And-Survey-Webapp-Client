@@ -11,6 +11,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { saveSurveyData } from "../../api/surveyAPIs";
 import useAuth from "../../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
+import Loading from "../../components/shared/Loading";
 
 const CreateSurvey = () => {
   const { user, loading } = useAuth();
@@ -41,10 +42,10 @@ const CreateSurvey = () => {
       showAlertOnSuccess("Inserted successfully!");
       reset();
       queryClient.invalidateQueries("createSurvey");
-      navigate(location?.state ? location.state : "/dashboard/dashboard");
+      navigate(location?.state ? location.state : "/dashboard");
     },
     onError: (error) => {
-      console.log(error);
+      showAlertOnError(error);
     },
   });
 

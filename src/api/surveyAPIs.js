@@ -1,4 +1,5 @@
 import axiosPublic from "./axiosPublic";
+import axiosSecure from "./axiosSecure";
 
 export const saveSurveyData = async (data) => {
   console.log(data);
@@ -12,6 +13,14 @@ export const getSurveyData = async () => {
 };
 
 export const getUserBasedSurveyData = async (email) => {
-  const response = await axiosPublic.get(`/surveys?email=${email}`);
+  const response = await axiosSecure.get(`/user-surveys?email=${email}`);
+  return response.data;
+};
+
+export const updateSurveyData = async (obj) => {
+  const response = await axiosPublic.patch(
+    `/surveys/${obj._id}`,
+    obj.updatedSurvey
+  );
   return response.data;
 };

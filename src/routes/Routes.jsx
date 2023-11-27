@@ -40,7 +40,13 @@ const router = createBrowserRouter([
       },
       {
         path: "create-survey",
-        element: <CreateSurvey></CreateSurvey>,
+        element: (
+          <PrivateRoute>
+            <SurveyorRoute>
+              <CreateSurvey></CreateSurvey>
+            </SurveyorRoute>
+          </PrivateRoute>
+        ),
       },
     ],
   },
