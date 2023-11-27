@@ -9,11 +9,28 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { saveSurveyData } from "../../api/surveyAPIs";
+import useAuth from "../../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const CreateSurvey = () => {
+  const { user, loading } = useAuth();
   const { register, handleSubmit, reset } = useForm();
   const today = useCurrentDate();
   const navigate = useNavigate();
+  const categories = [
+    "Demographics",
+    "Climate change",
+    "Health",
+    "Satisfaction",
+    "Sports",
+    "Experience",
+    "Technology",
+    "Travel and Adventure ",
+    "Current Affairs",
+    "Community Service",
+    "Entertainment",
+    "Corporate",
+  ];
 
   const queryClient = useQueryClient();
 
@@ -24,7 +41,7 @@ const CreateSurvey = () => {
       showAlertOnSuccess("Inserted successfully!");
       reset();
       queryClient.invalidateQueries("createSurvey");
-      //   navigate(location?.state ? location.state : "/dashboard/surveys");
+      navigate(location?.state ? location.state : "/dashboard/display-surveys");
     },
     onError: (error) => {
       console.log(error);
@@ -37,20 +54,30 @@ const CreateSurvey = () => {
     if (dateValidity === "invalid") {
       showAlertOnError("Please enter a valid date!");
     } else {
-      const survey = {
-        title: data.title,
-        description: data.description,
-        category: data.category,
-        deadline: data.deadline,
-        status: "unpublished",
-      };
+      if (user.email) {
+        const survey = {
+          title: data.title,
+          description: data.description,
+          category: data.category,
+          deadline: data.deadline,
+          status: "unpublished",
+          email: user?.email,
+        };
 
-      mutation.mutate(survey);
+        mutation.mutate(survey);
+      } else return;
     }
   };
 
+  if (mutation.isLoading || loading) {
+    return <span>Loading...</span>;
+  }
+
   return (
     <DashboardContainer>
+      <Helmet>
+        <title>PanaPoll | Dashboard | Create Survey</title>
+      </Helmet>
       <h1 className="w-[80%] text-[#757575] text-[36px] text-left mb-5 pl-2 border-l-2 border-[#757575da]">
         Create Survey
       </h1>
@@ -73,7 +100,7 @@ const CreateSurvey = () => {
           </div>
 
           <div className="relative">
-            <div className="h-40 w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#7DDDD9] rounded-lg">
+            <div className="h-20 w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#7DDDD9] rounded-lg">
               <i className="fa-solid fa-envelope text-xl text-white"></i>
             </div>
             <textarea
@@ -81,7 +108,7 @@ const CreateSurvey = () => {
               {...register("description")}
               placeholder="Description"
               required
-              className="input bg-[#a1dada41] w-full h-40 pl-16 py-3 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
+              className="input bg-[#a1dada41] w-full h-20 pl-16 py-3 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
             />
           </div>
 
@@ -89,13 +116,17 @@ const CreateSurvey = () => {
             <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#7DDDD9] rounded-lg">
               <i className="fa-solid fa-envelope text-xl text-white"></i>
             </div>
-            <input
+            <select
               type="text"
               {...register("category")}
               placeholder="Category"
               required
               className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
-            />
+            >
+              {categories.map((category) => (
+                <option key={category}>{category}</option>
+              ))}
+            </select>
           </div>
 
           <div className="relative">

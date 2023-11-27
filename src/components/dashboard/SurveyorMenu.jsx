@@ -7,7 +7,7 @@ const SurveyorMenu = () => {
       <SIdebarMenuItem
         icon={<GoHomeFill></GoHomeFill>}
         menuText="Surveys"
-        route="/dashboard/surveys"
+        route="/dashboard/display-surveys"
       ></SIdebarMenuItem>
 
       <SIdebarMenuItem

@@ -5,6 +5,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import DashboardLayout from "../layouts/DashboardLayout";
 import CreateSurvey from "../pages/Dashboard/CreateSurvey";
+import DisplaySurveys from "../pages/Dashboard/DisplaySurveys";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "create-survey",
         element: <CreateSurvey></CreateSurvey>,
+      },
+      {
+        path: "display-surveys",
+        element: <DisplaySurveys></DisplaySurveys>,
       },
     ],
   },
