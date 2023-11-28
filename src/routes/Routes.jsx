@@ -9,6 +9,7 @@ import DisplaySurveys from "../pages/Dashboard/DisplaySurveys";
 import PrivateRoute from "./PrivateRoute";
 import SurveyorRoute from "./SurveyorRoute";
 import Surveys from "../pages/Surveys/Surveys";
+import SurveyDetails from "../pages/SurveyDetails";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/surveys",
         element: <Surveys></Surveys>,
+      },
+      {
+        path: "/survey-detail/:_id",
+        element: <SurveyDetails></SurveyDetails>,
       },
     ],
   },

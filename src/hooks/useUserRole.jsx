@@ -6,7 +6,8 @@ const useUserRole = () => {
   const { user } = useAuth();
 
   const {
-    isLoading,
+    isLoading: roleLoading,
+    isFetched,
     data: role,
     refetch,
   } = useQuery({
@@ -14,7 +15,7 @@ const useUserRole = () => {
     queryFn: () => getRole(user?.email),
   });
 
-  return [role, isLoading, refetch];
+  return [role, roleLoading, isFetched, refetch];
 };
 
 export default useUserRole;

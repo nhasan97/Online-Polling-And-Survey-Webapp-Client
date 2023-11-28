@@ -18,7 +18,10 @@ const ClientReviews = () => {
       });
   }, []);
 
-  const title = "Clients Reviews";
+  const title = {
+    mainTitle: "Clients Reviews",
+    subTitle: "What our clients say",
+  };
 
   const settings = {
     dots: true,
