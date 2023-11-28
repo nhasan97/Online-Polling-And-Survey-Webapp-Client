@@ -1,0 +1,63 @@
+[
+  {
+    "image": "https://i.postimg.cc/BbK80zxC/images.jpg",
+    "name": "John Doe",
+    "say": "Great service, highly recommended!",
+    "rating": 5
+  },
+  {
+    "image": "https://i.postimg.cc/23N18xGN/download-4.jpg",
+    "name": "Jane Smith",
+    "say": "Excellent work, very satisfied!",
+    "rating": 4.9
+  },
+  {
+    "image": "https://i.postimg.cc/MZNrxrkf/download-3.jpg",
+    "name": "Robert Johnson",
+    "say": "Impressive work, will use again!",
+    "rating": 3.5
+  },
+  {
+    "image": "https://i.postimg.cc/xTmpdyYx/download-2.jpg",
+    "name": "Maria Garcia",
+    "say": "Very professional, top-notch quality!",
+    "rating": 4.8
+  },
+
+  {
+    "image": "https://i.postimg.cc/CxVPnBxF/download-1.jpg",
+    "name": "James Williams",
+    "say": "Fantastic job, exceeded expectations!",
+    "rating": 4.5
+  },
+  {
+    "image": "https://i.postimg.cc/9fmL169K/download.jpg",
+    "name": "Jennifer Brown",
+    "say": "Reliable and efficient, highly appreciated!",
+    "rating": 3.8
+  },
+  {
+    "image": "https://i.postimg.cc/Nj7N6sKR/632-05400930en-Masterfile.jpg",
+    "name": "Michael Davis",
+    "say": "Exceptional service, will definitely recommend!",
+    "rating": 5
+  },
+  {
+    "image": "https://i.postimg.cc/JhpPFpcn/20161214164224-Getty-Images-533978993.jpg",
+    "name": "Elizabeth Miller",
+    "say": "Outstanding work, very pleased!",
+    "rating": 4.7
+  },
+  {
+    "image": "https://i.postimg.cc/sXzH7F2M/images-2.jpg",
+    "name": "William Wilson",
+    "say": "Top quality work, very professional!",
+    "rating": 4.6
+  },
+  {
+    "image": "https://i.postimg.cc/MTYPYscd/images-1.jpg",
+    "name": "Patricia Moore",
+    "say": "Excellent service, very satisfied!",
+    "rating": 5
+  }
+]
