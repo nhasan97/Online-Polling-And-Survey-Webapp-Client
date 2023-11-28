@@ -11,6 +11,7 @@ import useAuth from "../hooks/useAuth";
 import useResponse from "../hooks/useResponse";
 import usePerformMutation from "../hooks/usePerformMutation";
 import { saveSurveyPreference } from "../api/prefernceAPIs";
+import usePreference from "../hooks/usePreference";
 
 const SurveyDetails = () => {
   const _id = useParams();
@@ -18,6 +19,13 @@ const SurveyDetails = () => {
   const { user, loading } = useAuth();
 
   const [responses, loadingResponses, isFetched, refetch] = useResponse(_id);
+
+  const [
+    preferences,
+    loadingPreferences,
+    isPreferencesFetched,
+    preferencesRefetch,
+  ] = usePreference(_id);
 
   //fetching the data of the particular survey
   const { isLoading, data: survey } = useQuery({
@@ -27,8 +35,17 @@ const SurveyDetails = () => {
 
   //==================================== Like/Dislike ====================================
 
+  //testing if the person logged in already gave feedback or not
+  let feedbackExists;
+  if (isPreferencesFetched) {
+    feedbackExists = preferences.find(
+      (preference) => preference?.participantsEmail === user?.email
+    );
+    console.log(feedbackExists);
+  }
+
   //saving ike/dislike in db
-  const mutation2 = usePerformMutation(
+  const mutation1 = usePerformMutation(
     "savePreference",
     saveSurveyPreference,
     "Thanks for your feedback!"
@@ -44,8 +61,8 @@ const SurveyDetails = () => {
       action: action || "Not Found",
       timeStamp: Date.now(),
     };
-    mutation2.mutate(response);
-    // refetch();
+    mutation1.mutate(response);
+    preferencesRefetch();
   };
 
   //==================================== Vote ====================================
@@ -59,7 +76,7 @@ const SurveyDetails = () => {
   }
 
   //saving response in db
-  const mutation1 = usePerformMutation(
+  const mutation2 = usePerformMutation(
     "saveResponse",
     saveSurveyResponse,
     "Inserted successfully!"
@@ -77,7 +94,7 @@ const SurveyDetails = () => {
       vote: e.target.rad.value || "Not Found",
       timeStamp: Date.now(),
     };
-    mutation1.mutate(response);
+    mutation2.mutate(response);
     refetch();
   };
 
@@ -87,7 +104,7 @@ const SurveyDetails = () => {
     subTitle: "Your thoughts...Our drive | Your voice matters",
   };
 
-  if (isLoading || loading || loadingResponses) {
+  if (isLoading || loading || loadingResponses || loadingPreferences) {
     return <Loading></Loading>;
   }
 
@@ -122,23 +139,45 @@ const SurveyDetails = () => {
                 {survey?.deadline}
               </h3>
 
-              <div className="join ">
-                <button
-                  className="btn join-item text-xl w-full"
-                  onClick={() => handleLikeAndDislike("like")}
-                >
-                  <i className="fa-solid fa-thumbs-up"></i>
-                  <span>0</span>
-                </button>
+              {!feedbackExists ? (
+                <div className="join">
+                  <button
+                    className="btn join-item text-xl w-full"
+                    onClick={() => handleLikeAndDislike("like")}
+                  >
+                    <i className="fa-solid fa-thumbs-up"></i>
+                    <span>0</span>
+                  </button>
 
-                <button
-                  className="btn join-item text-xl w-full"
-                  onClick={() => handleLikeAndDislike("dislike")}
-                >
-                  <i className="fa-solid fa-thumbs-down"></i>
-                  <span>0</span>
-                </button>
-              </div>
+                  <button
+                    className="btn join-item text-xl w-full"
+                    onClick={() => handleLikeAndDislike("dislike")}
+                  >
+                    <i className="fa-solid fa-thumbs-down"></i>
+                    <span>0</span>
+                  </button>
+                </div>
+              ) : (
+                <div className="join">
+                  <button
+                    className="btn join-item text-xl w-full"
+                    onClick={() => handleLikeAndDislike("like")}
+                    disabled
+                  >
+                    <i className="fa-solid fa-thumbs-up"></i>
+                    <span>0</span>
+                  </button>
+
+                  <button
+                    className="btn join-item text-xl w-full"
+                    onClick={() => handleLikeAndDislike("dislike")}
+                    disabled
+                  >
+                    <i className="fa-solid fa-thumbs-down"></i>
+                    <span>0</span>
+                  </button>
+                </div>
+              )}
             </div>
 
             <fieldset className="w-full p-6 space-y-4 border rounded-lg">
