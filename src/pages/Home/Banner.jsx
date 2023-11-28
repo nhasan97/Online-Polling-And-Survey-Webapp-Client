@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import pic1 from "../../assets/Picture2.png";
 // import pic2 from "../../assets/Charts.gif";
 
@@ -18,9 +19,12 @@ const Banner = () => {
             Survey with Us Today!
           </h1>
 
-          <button className="btn bg-[#FE7E51] hover:bg-white text-lg text-white hover:text-[#FE7E51] border-none">
+          <Link
+            to="/surveys"
+            className="btn bg-[#FE7E51] hover:bg-white text-lg text-white hover:text-[#FE7E51] border-none"
+          >
             Explore <i className="fa-solid fa-arrow-right"></i>
-          </button>
+          </Link>
         </div>
 
         {/* <img src={pic2} alt="" /> */}

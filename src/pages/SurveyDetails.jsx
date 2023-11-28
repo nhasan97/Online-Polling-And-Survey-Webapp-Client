@@ -7,16 +7,23 @@ import Title from "../components/shared/Title";
 import Loading from "../components/shared/Loading";
 import timeStampToDateConverter from "../utilities/timeStampToDateConverter";
 import useAuth from "../hooks/useAuth";
-import {
-  showAlertOnError,
-  showAlertOnSuccess,
-} from "../utilities/displaySweetAlert";
 import useResponse from "../hooks/useResponse";
+import usePerformMutation from "../hooks/usePerformMutation";
 
 const SurveyDetails = () => {
   const _id = useParams();
+
   const { user, loading } = useAuth();
+
   const [responses, loadingResponses, isFetched, refetch] = useResponse(_id);
+
+  //fetching the data of the particular survey
+  const { isLoading, data: survey } = useQuery({
+    queryKey: ["getSingleSurveyData"],
+    queryFn: () => getSurvey(_id),
+  });
+
+  //testing if the person logged in already voted or not
   let alreadyVoted;
   if (isFetched) {
     alreadyVoted = responses.find(
@@ -25,30 +32,14 @@ const SurveyDetails = () => {
     console.log(alreadyVoted);
   }
 
-  const title = {
-    mainTitle: "Survey Details",
-    subTitle: "Your thoughts...Our drive | Your voice matters",
-  };
+  //saving response in db
+  const mutation = usePerformMutation(
+    "saveResponse",
+    saveSurveyResponse,
+    "Inserted successfully!"
+  );
 
-  const { isLoading, data: survey } = useQuery({
-    queryKey: ["getSingleSurveyData"],
-    queryFn: () => getSurvey(_id),
-  });
-
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationKey: ["saveResponse"],
-    mutationFn: saveSurveyResponse,
-    onSuccess: () => {
-      showAlertOnSuccess("Inserted successfully!");
-
-      queryClient.invalidateQueries("saveResponse");
-    },
-    onError: (error) => {
-      showAlertOnError(error);
-    },
-  });
-
+  //submit btn handler
   const handleVote = (e) => {
     e.preventDefault();
 
@@ -62,6 +53,12 @@ const SurveyDetails = () => {
     };
     mutation.mutate(response);
     refetch();
+  };
+
+  //setting the title
+  const title = {
+    mainTitle: "Survey Details",
+    subTitle: "Your thoughts...Our drive | Your voice matters",
   };
 
   if (isLoading || loading || loadingResponses) {
