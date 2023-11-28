@@ -1,5 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getSurvey, saveSurveyResponse } from "../api/surveyAPIs";
+import { useQuery } from "@tanstack/react-query";
+import { getSurvey } from "../api/surveyAPIs";
+import { saveSurveyResponse } from "../api/responseAPIs";
 import { useParams } from "react-router-dom";
 import Container from "../components/shared/Container";
 import { Helmet } from "react-helmet-async";
@@ -9,6 +10,7 @@ import timeStampToDateConverter from "../utilities/timeStampToDateConverter";
 import useAuth from "../hooks/useAuth";
 import useResponse from "../hooks/useResponse";
 import usePerformMutation from "../hooks/usePerformMutation";
+import { saveSurveyPreference } from "../api/prefernceAPIs";
 
 const SurveyDetails = () => {
   const _id = useParams();
@@ -23,17 +25,41 @@ const SurveyDetails = () => {
     queryFn: () => getSurvey(_id),
   });
 
+  //==================================== Like/Dislike ====================================
+
+  //saving ike/dislike in db
+  const mutation2 = usePerformMutation(
+    "savePreference",
+    saveSurveyPreference,
+    "Thanks for your feedback!"
+  );
+
+  //like/dislike btn handler
+  const handleLikeAndDislike = (action) => {
+    const response = {
+      surveyID: survey?._id || "Not Found",
+      surveyorEmail: survey?.email || "Not Found",
+      participantsName: user?.displayName || "Not Found",
+      participantsEmail: user?.email || "Not Found",
+      action: action || "Not Found",
+      timeStamp: Date.now(),
+    };
+    mutation2.mutate(response);
+    // refetch();
+  };
+
+  //==================================== Vote ====================================
+
   //testing if the person logged in already voted or not
   let alreadyVoted;
   if (isFetched) {
     alreadyVoted = responses.find(
       (response) => response?.votersEmail === user?.email
     );
-    console.log(alreadyVoted);
   }
 
   //saving response in db
-  const mutation = usePerformMutation(
+  const mutation1 = usePerformMutation(
     "saveResponse",
     saveSurveyResponse,
     "Inserted successfully!"
@@ -51,7 +77,7 @@ const SurveyDetails = () => {
       vote: e.target.rad.value || "Not Found",
       timeStamp: Date.now(),
     };
-    mutation.mutate(response);
+    mutation1.mutate(response);
     refetch();
   };
 
@@ -97,12 +123,18 @@ const SurveyDetails = () => {
               </h3>
 
               <div className="join ">
-                <button className="btn join-item text-xl w-full">
+                <button
+                  className="btn join-item text-xl w-full"
+                  onClick={() => handleLikeAndDislike("like")}
+                >
                   <i className="fa-solid fa-thumbs-up"></i>
                   <span>0</span>
                 </button>
 
-                <button className="btn join-item text-xl w-full">
+                <button
+                  className="btn join-item text-xl w-full"
+                  onClick={() => handleLikeAndDislike("dislike")}
+                >
                   <i className="fa-solid fa-thumbs-down"></i>
                   <span>0</span>
                 </button>

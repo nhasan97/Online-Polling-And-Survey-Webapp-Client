@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getSingleSurveyResponses } from "../api/surveyAPIs";
+import { getSingleSurveyResponses } from "../api/responseAPIs";
 
 const useResponse = (_id) => {
   const {
