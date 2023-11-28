@@ -3,9 +3,12 @@ import { showAlertOnError } from "../../utilities/displaySweetAlert";
 import MainLogo from "../shared/mainLogo";
 import { useState } from "react";
 import SurveyorMenu from "./SurveyorMenu";
+import useUserRole from "../../hooks/useUserRole";
+import AdminMenu from "./AdminMenu";
 
 const Sidebar = () => {
   const { user, logoutUser } = useAuth();
+  const [role] = useUserRole();
   const [openSidebar, setOpenSidebar] = useState(false);
 
   const handleLogout = () => {
@@ -49,11 +52,8 @@ const Sidebar = () => {
         </div>
 
         <div className="text-[#a5a5a5] py-5">
-          {/* {user && user.roll === "surveyor" && (
-            <> */}
-          <SurveyorMenu></SurveyorMenu>
-          {/* </>
-          )} */}
+          {role === "admin" && <AdminMenu></AdminMenu>}
+          {role === "surveyor" && <SurveyorMenu></SurveyorMenu>}
         </div>
 
         <div>
