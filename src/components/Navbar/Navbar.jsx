@@ -57,7 +57,7 @@ const Navbar = () => {
               </ul>
             </div>
 
-            <MainLogo></MainLogo>
+            <MainLogo caller={"n"}></MainLogo>
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">{links}</ul>

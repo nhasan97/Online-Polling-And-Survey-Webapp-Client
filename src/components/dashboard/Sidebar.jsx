@@ -5,6 +5,7 @@ import { useState } from "react";
 import SurveyorMenu from "./SurveyorMenu";
 import useUserRole from "../../hooks/useUserRole";
 import AdminMenu from "./AdminMenu";
+import sidebarBg from "../../assets/sidebar-bg.png";
 
 const Sidebar = () => {
   const { user, logoutUser } = useAuth();
@@ -35,31 +36,35 @@ const Sidebar = () => {
             : `-translate-x-full transition duration-300 ease-in-out`
         }`}
       >
-        <div className="w-full flex justify-center items-center py-5">
-          <MainLogo></MainLogo>
+        <div className="w-full py-8">
+          <MainLogo caller={"d"}></MainLogo>
         </div>
 
-        <div className="w-full flex flex-col justify-center items-center gap-3 py-5">
+        <div className="w-full flex flex-col justify-center items-center gap-3 ">
           <div className="avatar">
-            <div className="w-24 mask mask-hexagon">
+            <div className="w-20 mask mask-hexagon">
               <img src={user?.photoURL} />
             </div>
           </div>
-          <h1 className="normal-case text-2xl text-[#646cff]">
+          <h1 className="normal-case text-2xl text-[#71357B] font-medium">
             {user?.displayName}
           </h1>
           <p className="normal-case text-lg text-[#a5a5a5]">{user?.email}</p>
         </div>
 
-        <div className="text-[#a5a5a5] py-5">
+        <div className="flex flex-col justify items-start text-[#a5a5a5] p-5">
           {role === "admin" && <AdminMenu></AdminMenu>}
-          {role === "surveyor" && <SurveyorMenu></SurveyorMenu>}
-        </div>
-
-        <div>
-          <button className="btn" onClick={handleLogout}>
+          {role === "surveyor" && <SurveyorMenu></SurveyorMenu>}{" "}
+          <button
+            className="btn w-full text-[#71357B] text-lg"
+            onClick={handleLogout}
+          >
             Logout
           </button>
+        </div>
+
+        <div className="">
+          <img src={sidebarBg} alt="" className="w-full" />
         </div>
       </div>
     </div>
