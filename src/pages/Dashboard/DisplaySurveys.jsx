@@ -14,6 +14,7 @@ import dateComparer from "../../utilities/dateComparer";
 import { showAlertOnError } from "../../utilities/displaySweetAlert";
 import usePerformMutation from "../../hooks/usePerformMutation";
 import Title from "../../components/shared/Title";
+import { Link } from "react-router-dom";
 
 const DisplaySurveys = () => {
   const { user, loading } = useAuth();
@@ -286,9 +287,12 @@ const DisplaySurveys = () => {
                       <i className="fa-solid fa-comment group-hover:text-white"></i>
                     </button>
 
-                    <button className="btn group hover:bg-[#101322] hover:text-white">
+                    <Link
+                      to={`/dashboard/survey-response/${survey._id}`}
+                      className="btn group hover:bg-[#101322] hover:text-white"
+                    >
                       Responses
-                    </button>
+                    </Link>
                   </td>
                 </tr>
               ))}

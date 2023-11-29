@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import SurveyorRoute from "./SurveyorRoute";
 import Surveys from "../pages/Surveys/Surveys";
 import SurveyDetails from "../pages/SurveyDetails";
+import AdminSurveyorRoute from "./AdminSurveyorRoute";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,26 @@ const router = createBrowserRouter([
             <SurveyorRoute>
               <CreateSurvey></CreateSurvey>
             </SurveyorRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "create-survey",
+        element: (
+          <PrivateRoute>
+            <SurveyorRoute>
+              <CreateSurvey></CreateSurvey>
+            </SurveyorRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "survey-response/:id",
+        element: (
+          <PrivateRoute>
+            <AdminSurveyorRoute>
+              <CreateSurvey></CreateSurvey>
+            </AdminSurveyorRoute>
           </PrivateRoute>
         ),
       },

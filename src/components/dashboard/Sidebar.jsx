@@ -5,7 +5,6 @@ import { useState } from "react";
 import SurveyorMenu from "./SurveyorMenu";
 import useUserRole from "../../hooks/useUserRole";
 import AdminMenu from "./AdminMenu";
-import sidebarBg from "../../assets/sidebar-bg.png";
 
 const Sidebar = () => {
   const { user, logoutUser } = useAuth();
@@ -28,15 +27,15 @@ const Sidebar = () => {
       >
         open
       </div>
-
+      {/* bg-[#F2F2F2] */}
       <div
-        className={`w-64 min-h-screen bg-[#F2F2F2] rounded-r-[36px] absolute md:fixed z-10 md:translate-x-0 ${
+        className={`w-64 min-h-screen bg-[url(../public/sidebarBg.png)] bg-no-repeat bg-center bg-contain rounded-r-[36px] absolute md:fixed z-10 md:translate-x-0 ${
           openSidebar
             ? `translate-x-0 transition duration-300 ease-in-out`
             : `-translate-x-full transition duration-300 ease-in-out`
         }`}
       >
-        <div className="w-full py-8">
+        <div className="w-full py-6">
           <MainLogo caller={"d"}></MainLogo>
         </div>
 
@@ -52,19 +51,15 @@ const Sidebar = () => {
           <p className="normal-case text-lg text-[#a5a5a5]">{user?.email}</p>
         </div>
 
-        <div className="flex flex-col justify items-start text-[#a5a5a5] p-5">
+        <div className="flex flex-col justify items-start text-[#a5a5a5] p-6">
           {role === "admin" && <AdminMenu></AdminMenu>}
-          {role === "surveyor" && <SurveyorMenu></SurveyorMenu>}{" "}
+          {role === "surveyor" && <SurveyorMenu></SurveyorMenu>}
           <button
-            className="btn w-full text-[#71357B] text-lg"
+            className="btn w-full text-[#71357B] text-lg mt-5"
             onClick={handleLogout}
           >
             Logout
           </button>
-        </div>
-
-        <div className="">
-          <img src={sidebarBg} alt="" className="w-full" />
         </div>
       </div>
     </div>
