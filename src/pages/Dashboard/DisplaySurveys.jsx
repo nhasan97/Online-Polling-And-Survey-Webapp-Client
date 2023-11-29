@@ -1,5 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getUserBasedSurveyData, updateSurveyData } from "../../api/surveyAPIs";
+import { useQuery } from "@tanstack/react-query";
+import {
+  deleteSurveyData,
+  getUserBasedSurveyData,
+  updateSurveyData,
+} from "../../api/surveyAPIs";
 import { Helmet } from "react-helmet-async";
 import timeStampToDateConverter from "../../utilities/timeStampToDateConverter";
 import useAuth from "../../hooks/useAuth";
@@ -7,14 +11,15 @@ import DashboardContainer from "../../components/dashboard/shared/DashboardConta
 import Loading from "../../components/shared/Loading";
 import useCurrentDate from "../../hooks/useCurrentDate";
 import dateComparer from "../../utilities/dateComparer";
-import {
-  showAlertOnError,
-  showAlertOnSuccess,
-} from "../../utilities/displaySweetAlert";
+import { showAlertOnError } from "../../utilities/displaySweetAlert";
+import usePerformMutation from "../../hooks/usePerformMutation";
+import Title from "../../components/shared/Title";
 
 const DisplaySurveys = () => {
   const { user, loading } = useAuth();
+
   const today = useCurrentDate();
+
   const categories = [
     "Demographics",
     "Climate change",
@@ -30,34 +35,44 @@ const DisplaySurveys = () => {
     "Corporate",
   ];
 
-  const queryClient = useQueryClient();
+  //setting the title
+  const title = {
+    mainTitle: "Your Surveys",
+    subTitle: "",
+  };
 
-  const mutation = useMutation({
-    mutationKey: ["updateSurvey"],
-    mutationFn: updateSurveyData,
-    onSuccess: () => {
-      showAlertOnSuccess("Updated successfully!");
-      queryClient.invalidateQueries("updateSurvey");
-    },
-    onError: (error) => {
-      showAlertOnError(error);
-    },
+  //fetching surveyor based survey data
+  const {
+    isLoading,
+    data: surveys,
+    refetch,
+  } = useQuery({
+    queryKey: ["getUserSurveyData"],
+    queryFn: () => getUserBasedSurveyData(user?.email),
   });
 
+  //performing mutation for updating survey data
+  const mutation1 = usePerformMutation(
+    "updateSurvey",
+    updateSurveyData,
+    "Updated successfully!"
+  );
+
+  //update button handler
   const handleUpdateSurvey = (e) => {
     e.preventDefault();
 
     const form = e.target;
     const _id = form._id.value || "Not Found";
+    const defaultDeadline = form.hiddenDeadline.value || "Not Found";
     const title = form.title.value || "Not Found";
     const description = form.description.value || "Not Found";
     const category = form.category.value || "Not Found";
     const deadline = form.deadline.value || "Not Found";
-    const status = form.status.value || "Not Found";
 
     const dateValidity = dateComparer(today, deadline);
 
-    if (dateValidity === "invalid") {
+    if (defaultDeadline !== deadline && dateValidity === "invalid") {
       showAlertOnError("Please enter a valid date!");
     } else {
       const updatedSurvey = {
@@ -65,33 +80,29 @@ const DisplaySurveys = () => {
         description,
         category,
         deadline,
-        status,
-        email: user?.email,
       };
 
-      mutation.mutate({ _id, updatedSurvey });
+      mutation1.mutate({ _id, updatedSurvey });
+      refetch();
       form.reset();
     }
   };
 
-  const {
-    isLoading,
-    isFetching,
-    isError,
-    data: surveys,
-    error,
-    refetch,
-  } = useQuery({
-    queryKey: ["getUserSurveyData"],
-    queryFn: () => getUserBasedSurveyData(user?.email),
-  });
+  //performing mutation for deleting survey data
+  const mutation2 = usePerformMutation(
+    "deleteSurvey",
+    deleteSurveyData,
+    "Deleted successfully!"
+  );
 
-  if (isLoading || loading || isFetching) {
+  //delete button handler
+  const handleDelete = (_id) => {
+    mutation2.mutate({ _id });
+    refetch();
+  };
+
+  if (isLoading || loading) {
     return <Loading />;
-  }
-
-  if (isError) {
-    return <span>Error: {error.message}</span>;
   }
 
   if (surveys.length > 0) {
@@ -101,34 +112,34 @@ const DisplaySurveys = () => {
           <title>PanaPoll | Dashboard | Surveys</title>
         </Helmet>
 
-        <div className="mb-6">{/* <Title title={title}></Title> */}</div>
+        <Title title={title}></Title>
 
-        <div className="w-[80%] overflow-y-auto h-[400px] rounded-lg">
-          <table className="table table-zebra rounded-lg text-base text-center">
+        <div className="w-[90%] overflow-y-auto h-[400px] rounded-lg">
+          <table className="w-full table table-zebra rounded-lg text-base text-center">
             {/* head */}
-            <thead className="bg-[#323484] text-base text-white font-normal text-center">
+            <thead className=" bg-[#71357B] text-base text-white font-normal text-center">
               <tr>
                 <th>Title</th>
-                <th>Detail</th>
+                <th>Details</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {/* row  */}
-
               {surveys.map((survey) => (
                 <tr key={survey._id}>
-                  <th className="text-[#ff5c11dc] text-left">{survey.title}</th>
+                  <th className="text-[#71357B] text-left">{survey.title}</th>
                   <td>
                     <button
-                      className="btn"
+                      className="btn btn-circle hover:bg-[#71357B] group"
                       onClick={() =>
                         document.getElementById(survey._id).showModal()
                       }
                     >
-                      Details
+                      <i className="fa-solid fa-circle-info group-hover:text-white"></i>
                     </button>
+
                     <dialog id={survey._id} className="modal">
                       <div className="modal-box text-left">
                         <h3 className="font-bold text-lg">{survey.title}</h3>
@@ -150,12 +161,12 @@ const DisplaySurveys = () => {
                   <td>{survey.status}</td>
                   <td className="flex justify-center gap-3">
                     <button
-                      className="btn"
+                      className="btn hover:bg-emerald-500 group"
                       onClick={() =>
                         document.getElementById("u" + survey._id).showModal()
                       }
                     >
-                      Update
+                      <i className="fa-solid fa-pen-to-square group-hover:text-white"></i>
                     </button>
 
                     <dialog id={"u" + survey._id} className="modal">
@@ -176,6 +187,14 @@ const DisplaySurveys = () => {
                               required
                               hidden
                               defaultValue={survey._id}
+                            />
+
+                            <input
+                              type="text"
+                              name="hiddenDeadline"
+                              required
+                              hidden
+                              defaultValue={survey.deadline}
                             />
 
                             <input
@@ -255,9 +274,21 @@ const DisplaySurveys = () => {
                         </div>
                       </div>
                     </dialog>
-                    <button className="btn">Delete</button>
-                    <button className="btn">Feed Back</button>
-                    <button className="btn">Responses</button>
+
+                    <button
+                      className="btn hover:bg-red-500 group"
+                      onClick={() => handleDelete(survey._id)}
+                    >
+                      <i className="fa-solid fa-trash group-hover:text-white "></i>
+                    </button>
+
+                    <button className="btn hover:bg-[#FE7E51] group">
+                      <i className="fa-solid fa-comment group-hover:text-white"></i>
+                    </button>
+
+                    <button className="btn group hover:bg-[#101322] hover:text-white">
+                      Responses
+                    </button>
                   </td>
                 </tr>
               ))}

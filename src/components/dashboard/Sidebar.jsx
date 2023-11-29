@@ -29,7 +29,7 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={`w-64 min-h-screen bg-[#f1f1f1] rounded-r-[36px] absolute md:fixed z-10 md:translate-x-0 ${
+        className={`w-64 min-h-screen bg-[#F2F2F2] rounded-r-[36px] absolute md:fixed z-10 md:translate-x-0 ${
           openSidebar
             ? `translate-x-0 transition duration-300 ease-in-out`
             : `-translate-x-full transition duration-300 ease-in-out`

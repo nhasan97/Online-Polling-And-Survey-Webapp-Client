@@ -24,6 +24,11 @@ export const updateSurveyData = async (obj) => {
   return response.data;
 };
 
+export const deleteSurveyData = async (_id) => {
+  const response = await axiosPublic.delete(`/surveys/${_id._id}`);
+  return response.data;
+};
+
 export const getSurvey = async (_id) => {
   const response = await axiosPublic.get(`/surveys/${_id._id}`);
   return response.data;
