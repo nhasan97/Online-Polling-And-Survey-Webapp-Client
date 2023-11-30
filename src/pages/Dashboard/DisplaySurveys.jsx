@@ -15,6 +15,7 @@ import { showAlertOnError } from "../../utilities/displaySweetAlert";
 import usePerformMutation from "../../hooks/usePerformMutation";
 import Title from "../../components/shared/Title";
 import { Link } from "react-router-dom";
+import NoData from "../../components/shared/NoData";
 
 const DisplaySurveys = () => {
   const { user, loading } = useAuth();
@@ -302,13 +303,7 @@ const DisplaySurveys = () => {
       </DashboardContainer>
     );
   } else {
-    return (
-      <div className="max-w-screen-xl mx-auto px-20">
-        <div className="w-full h-screen flex flex-col justify-center items-center">
-          <h1 className="text-6xl font-semibold">No Surveys Found</h1>
-        </div>
-      </div>
-    );
+    <NoData text={"No Survey Found"}></NoData>;
   }
 };
 

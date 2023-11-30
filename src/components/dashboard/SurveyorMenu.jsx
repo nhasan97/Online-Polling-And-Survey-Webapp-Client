@@ -1,8 +1,9 @@
 import SIdebarMenuItem from "./SIdebarMenuItem";
+import "./Sidebar.css";
 
 const SurveyorMenu = () => {
   return (
-    <div className="flex flex-col justify-center items-start mx-auto">
+    <div className="sb flex flex-col justify-center items-start mx-auto">
       <SIdebarMenuItem
         icon={<i className="fa-solid fa-square-poll-vertical"></i>}
         menuText="Surveys"
