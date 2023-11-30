@@ -70,7 +70,7 @@ const Register = () => {
   return (
     <div className="w-full h-screen flex justify-center items-center bg-[url('src/assets/others/authentication.png')]">
       <div className="max-w-screen-xl mx-auto flex justify-center items-center shadow-xl">
-        <div className="w-1/2 px-10">
+        <div className="px-10">
           <form
             className="flex flex-col gap-4 text-left"
             onSubmit={handleSubmit(onSubmit)}
@@ -79,60 +79,64 @@ const Register = () => {
               Sign UP
             </h1>
 
-            <label htmlFor="in1" className="">
-              Name
+            <div className="relative">
+              <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#95D0D4] rounded-lg">
+                <i className="fa-solid fa-signature text-xl text-white"></i>
+              </div>
               <input
                 id="in1"
                 type="text"
                 {...register("name", { required: true })}
-                placeholder="Type Here"
-                className="input input-bordered w-full"
+                placeholder="Name"
+                className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
               />
               {errors.name?.type === "required" && (
                 <p className="text-red-500">Name is required</p>
               )}
-            </label>
+            </div>
 
-            <label htmlFor="in2" className="">
-              Email
+            <div className="relative">
+              <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#95D0D4] rounded-lg">
+                <i className="fa-solid fa-envelope text-xl text-white"></i>
+              </div>
               <input
                 id="in2"
                 type="email"
                 {...register("email", { required: true })}
-                placeholder="Type Here"
-                className="input input-bordered w-full"
+                placeholder="Email"
+                className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
               />
               {errors.email?.type === "required" && (
                 <p className="text-red-500">Email is required</p>
               )}
-            </label>
+            </div>
 
-            <label htmlFor="in3" className="">
-              Password
-              <div className="relative">
-                <input
-                  id="in3"
-                  type={showPass ? "text" : "password"}
-                  {...register("pass", {
-                    required: true,
-                    minLength: 6,
-                    maxLength: 20,
-                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
-                  })}
-                  placeholder="Type Here"
-                  className="input input-bordered w-full"
-                />
-                <span
-                  className=" text-base absolute right-4 translate-y-[50%]"
-                  onClick={() => setShowPass(!showPass)}
-                >
-                  {showPass ? (
-                    <i className="fa-solid fa-eye-slash"></i>
-                  ) : (
-                    <i className="fa-solid fa-eye"></i>
-                  )}
-                </span>
+            <div className="relative">
+              <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#95D0D4] rounded-lg">
+                <i className="fa-solid fa-key text-xl text-white"></i>
               </div>
+              <input
+                id="in3"
+                type={showPass ? "text" : "password"}
+                {...register("pass", {
+                  required: true,
+                  minLength: 6,
+                  maxLength: 20,
+                  pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                })}
+                placeholder="Password"
+                className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
+              />
+              <span
+                className=" text-base absolute right-4 translate-y-[50%]"
+                onClick={() => setShowPass(!showPass)}
+              >
+                {showPass ? (
+                  <i className="fa-solid fa-eye-slash"></i>
+                ) : (
+                  <i className="fa-solid fa-eye"></i>
+                )}
+              </span>
               {errors.pass?.type === "required" && (
                 <p className="text-red-500">Password is required</p>
               )}
@@ -152,7 +156,7 @@ const Register = () => {
                   </ul>
                 </p>
               )}
-            </label>
+            </div>
 
             <div className="form-control w-full">
               <label className="label">
@@ -170,24 +174,23 @@ const Register = () => {
             <input
               type="submit"
               value="Sign Up"
-              className="input w-full bg-[#D1A054] text-white"
+              className="btn w-1/2 mx-auto bg-[#FE7E51] text-lg font-medium text-white hover:text-[#FE7E51] normal-case rounded-lg"
             />
           </form>
 
           <div className="flex flex-col justify-center items-center gap-4 mt-4">
-            <p className="text-xl text-[#D1A054] text-center">
+            <p className="text-lg text-[#444] text-center">
               Already registered?
               <Link className="font-bold" to="/login">
                 Go to log in
               </Link>
             </p>
-            <p className="text-xl font-medium">Or sign in with</p>
-            <div className="flex justify-center items-center gap-6 text-xl">
-              <BiLogoGoogle
-                className=" border-2 border-black rounded-full w-8 h-8"
-                onClick={handleRegistrationWithGoogle}
-              ></BiLogoGoogle>
-            </div>
+            <p className="text-lg font-medium">Or sign in with</p>
+
+            <BiLogoGoogle
+              className="btn w-1/2 mx-auto bg-[#FE7E51] text-lg font-medium text-white hover:text-[#FE7E51] normal-case rounded-lg"
+              onClick={handleRegistrationWithGoogle}
+            ></BiLogoGoogle>
           </div>
         </div>
       </div>

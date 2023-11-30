@@ -17,7 +17,7 @@ export const getUserBasedSurveyData = async (email) => {
 };
 
 export const updateSurveyData = async (obj) => {
-  const response = await axiosPublic.patch(
+  const response = await axiosSecure.patch(
     `/surveys/${obj._id}`,
     obj.updatedSurvey
   );
@@ -25,7 +25,7 @@ export const updateSurveyData = async (obj) => {
 };
 
 export const deleteSurveyData = async (_id) => {
-  const response = await axiosPublic.delete(`/surveys/${_id._id}`);
+  const response = await axiosSecure.delete(`/surveys/${_id._id}`);
   return response.data;
 };
 
@@ -36,7 +36,7 @@ export const getSurvey = async (_id) => {
 
 export const updateSurveyStatus = async (obj) => {
   console.log(obj);
-  const { data } = await axiosPublic.patch(
+  const { data } = await axiosSecure.patch(
     `/surveys/update-status/${obj?._id}`,
     obj?.updatedSurvey
   );
