@@ -20,9 +20,36 @@ const ProPayment = () => {
         <title>PanaPoll | Become PRO</title>
       </Helmet>
 
-      <div className="min-h-screen pt-16 pb-5 ">
+      <div className="min-h-screen pt-16 pb-5 space-y-6">
         <Title title={title}></Title>
-        {/* options={options} */}
+
+        <div className="flex justify-between items-center px-20 py-5 bg-[#71357B] text-white rounded-lg">
+          <div>
+            <p className="text-2xl mb-6">Pro user Plan</p>
+            <h1 className="text-3xl">
+              Only <span className="text-5xl font-semibold">$14</span> / One
+              time payment
+            </h1>
+          </div>
+          <div className="text-lg">
+            <ul>
+              <p className="text-2xl mb-6">You will enjoy</p>
+              <li className="text-lg mb-2">
+                <i className="fa-solid fa-check"></i> Participate in any survey
+              </li>
+              <li className="text-lg mb-2">
+                <i className="fa-solid fa-check"></i> Like/Dislike survey
+              </li>
+              <li className="text-lg mb-2">
+                <i className="fa-solid fa-check"></i> Comment in any survey
+              </li>
+              <li className="text-lg mb-2">
+                <i className="fa-solid fa-check"></i> Report survey
+              </li>
+            </ul>
+          </div>
+        </div>
+
         <Elements stripe={stripePromise}>
           <CheckoutForm />
         </Elements>
