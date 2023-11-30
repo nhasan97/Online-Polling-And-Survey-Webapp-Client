@@ -8,6 +8,7 @@ import usePerformMutation from "../hooks/usePerformMutation";
 import { savePaymentData } from "../api/paymentAPIs";
 import { updateUserRole } from "../api/usersAPIs";
 import { useNavigate } from "react-router-dom";
+import { showAlertOnError } from "../utilities/displaySweetAlert";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -44,61 +45,66 @@ const CheckoutForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!stripe || !elements) {
-      return;
-    }
-
-    const card = elements.getElement(CardElement);
-
-    if (card == null) {
-      return;
-    }
-
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card,
-    });
-
-    if (error) {
-      console.log("Error:", error);
-      setError(error.message);
+    if (!user) {
+      showAlertOnError("Please login first");
+      navigate("/login");
     } else {
-      console.log("Payment Method:", paymentMethod);
-      setError("");
-    }
+      if (!stripe || !elements) {
+        return;
+      }
 
-    const { paymentIntent, error: paymentError } =
-      await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: card,
-          billing_details: {
-            name: user?.displayName || "Not Found",
-            email: user?.email || "Not Found",
-          },
-        },
+      const card = elements.getElement(CardElement);
+
+      if (card == null) {
+        return;
+      }
+
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: "card",
+        card,
       });
 
-    if (paymentError) {
-      setError(paymentError.message);
-    } else {
-      setError("");
-      if (paymentIntent.status === "succeeded") {
-        setTransactionID(paymentIntent.id);
+      if (error) {
+        console.log("Error:", error);
+        setError(error.message);
+      } else {
+        console.log("Payment Method:", paymentMethod);
+        setError("");
+      }
 
-        const payment = {
-          name: user?.displayName || "Not Found",
-          email: user?.email || "Not Found",
-          price: price,
-          transactionID: paymentIntent.id,
-        };
+      const { paymentIntent, error: paymentError } =
+        await stripe.confirmCardPayment(clientSecret, {
+          payment_method: {
+            card: card,
+            billing_details: {
+              name: user?.displayName || "Not Found",
+              email: user?.email || "Not Found",
+            },
+          },
+        });
 
-        const email = user?.email;
-        const role = "pro-user";
-        const updatedRole = { role };
+      if (paymentError) {
+        setError(paymentError.message);
+      } else {
+        setError("");
+        if (paymentIntent.status === "succeeded") {
+          setTransactionID(paymentIntent.id);
 
-        mutation1.mutate({ payment });
-        mutation2.mutate({ email, updatedRole });
-        navigate("/", { replace: true });
+          const payment = {
+            name: user?.displayName || "Not Found",
+            email: user?.email || "Not Found",
+            price: price,
+            transactionID: paymentIntent.id,
+          };
+
+          const email = user?.email;
+          const role = "pro-user";
+          const updatedRole = { role };
+
+          mutation1.mutate({ payment });
+          mutation2.mutate({ email, updatedRole });
+          navigate("/", { replace: true });
+        }
       }
     }
   };

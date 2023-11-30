@@ -18,6 +18,8 @@ import ManageSurveys from "../pages/Dashboard/ManageSurveys";
 import ProPayment from "../pages/ProPayment";
 import ManagePayments from "../pages/Dashboard/ManagePayments";
 import Error from "../pages/Error";
+import AboutUs from "../pages/AboutUs";
+import ContactUs from "../pages/Home/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
       {
         path: "/pro",
         element: <ProPayment></ProPayment>,
+      },
+      {
+        path: "/about",
+        element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/contact",
+        element: <ContactUs></ContactUs>,
       },
     ],
   },
