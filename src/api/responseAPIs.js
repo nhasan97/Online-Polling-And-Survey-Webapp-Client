@@ -19,3 +19,8 @@ export const getTotalVotes = async () => {
   const response = await axiosPublic.get("/total-votes");
   return response.data;
 };
+
+export const getParticularSurveyVotes = async (_id) => {
+  const response = await axiosPublic.get(`/total-votes/${_id}`);
+  return response.data;
+};

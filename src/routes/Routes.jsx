@@ -11,6 +11,7 @@ import SurveyorRoute from "./SurveyorRoute";
 import Surveys from "../pages/Surveys/Surveys";
 import SurveyDetails from "../pages/SurveyDetails";
 import AdminSurveyorRoute from "./AdminSurveyorRoute";
+import SurveyResponses from "../pages/Dashboard/SurveyResponses";
 
 const router = createBrowserRouter([
   {
@@ -70,11 +71,11 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "survey-response/:id",
+        path: "survey-response/:_id",
         element: (
           <PrivateRoute>
             <AdminSurveyorRoute>
-              <CreateSurvey></CreateSurvey>
+              <SurveyResponses></SurveyResponses>
             </AdminSurveyorRoute>
           </PrivateRoute>
         ),

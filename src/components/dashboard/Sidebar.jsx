@@ -29,7 +29,7 @@ const Sidebar = () => {
       </div>
       {/* bg-[#F2F2F2] */}
       <div
-        className={`w-64 min-h-screen bg-[url(../public/sidebarBg.png)] bg-no-repeat bg-center bg-contain rounded-r-[36px] absolute md:fixed z-10 md:translate-x-0 ${
+        className={`w-64 min-h-screen bg-[url(../public/sidebarBg.png)] bg-no-repeat bg-center bg-cover rounded-r-[36px] absolute md:fixed z-10 md:translate-x-0 ${
           openSidebar
             ? `translate-x-0 transition duration-300 ease-in-out`
             : `-translate-x-full transition duration-300 ease-in-out`
