@@ -2,6 +2,7 @@ import Container from "../../components/shared/Container";
 import Title from "../../components/shared/Title";
 import { MdKeyboardOptionKey } from "react-icons/md";
 import { MdAdsClick } from "react-icons/md";
+import pic1 from "../../assets/Picture2.png";
 
 const HowDoesItWork = () => {
   const title = {
@@ -10,8 +11,10 @@ const HowDoesItWork = () => {
   };
   return (
     <Container>
-      <div className="h-screen flex flex-col justify-center items-center">
+      <div className="min-h-screen flex flex-col justify-center items-center mt-20">
         <Title title={title}></Title>
+
+        <img src={pic1} alt="" className="w-1/2 mx-auto" />
 
         <div className="py-10 grid grid-cols-3 gap-6">
           <div className="flex flex-col justify-start items-center gap-6">

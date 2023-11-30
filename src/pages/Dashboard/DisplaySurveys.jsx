@@ -270,7 +270,7 @@ const DisplaySurveys = () => {
                             <input
                               type="submit"
                               value="Update"
-                              className="btn w-1/2 mx-auto bg-[#323484] text-lg font-medium text-white hover:text-[#323484] normal-case rounded-lg"
+                              className="btn w-1/2 mx-auto bg-[#101322] text-lg font-medium text-white hover:text-[#323484] normal-case rounded-lg"
                             />
                           </form>
                         </div>

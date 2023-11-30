@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import pic1 from "../../assets/Picture2.png";
+
 // import pic2 from "../../assets/Charts.gif";
 
 const Banner = () => {
@@ -29,7 +29,6 @@ const Banner = () => {
 
         {/* <img src={pic2} alt="" /> */}
       </div>
-      <img src={pic1} alt="" className="w-1/2 mx-auto" />
     </div>
   );
 };
