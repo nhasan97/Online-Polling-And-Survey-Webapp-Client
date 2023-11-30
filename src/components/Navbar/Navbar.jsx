@@ -13,7 +13,7 @@ const Navbar = () => {
     <div className="text-[#757575] text-base font-medium space-x-8">
       <NavLink to="/">Home</NavLink>
       <NavLink to="/surveys">Surveys</NavLink>
-      <NavLink to="/">Pro</NavLink>
+      <NavLink to="/pro">Pro</NavLink>
 
       {user && <NavLink to="/dashboard">Dashboard</NavLink>}
     </div>

@@ -10,7 +10,7 @@ const Footer = () => {
       <Container>
         <footer className="flex justify-between items-center text-neutral-content">
           <div className="w-[20%]">
-            <MainLogo></MainLogo>
+            <MainLogo caller="f"></MainLogo>
           </div>
 
           <p className="w-[60%] text-center">

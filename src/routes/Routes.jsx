@@ -15,6 +15,7 @@ import SurveyResponses from "../pages/Dashboard/SurveyResponses";
 import ManageUsers from "../pages/Dashboard/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import ManageSurveys from "../pages/Dashboard/ManageSurveys";
+import ProPayment from "../pages/ProPayment";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/survey-detail/:_id",
         element: <SurveyDetails></SurveyDetails>,
+      },
+      {
+        path: "/pro",
+        element: <ProPayment></ProPayment>,
       },
     ],
   },
