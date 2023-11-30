@@ -16,11 +16,14 @@ import ManageUsers from "../pages/Dashboard/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import ManageSurveys from "../pages/Dashboard/ManageSurveys";
 import ProPayment from "../pages/ProPayment";
+import ManagePayments from "../pages/Dashboard/ManagePayments";
+import Error from "../pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
@@ -41,7 +44,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/dashboard",
+    path: "dashboard",
     element: (
       <PrivateRoute>
         <DashboardLayout></DashboardLayout>
@@ -49,7 +52,7 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/dashboard",
+        path: "display-surveys",
         element: (
           <PrivateRoute>
             <SurveyorRoute>
@@ -104,6 +107,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoute>
               <ManageUsers></ManageUsers>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "payments",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManagePayments></ManagePayments>
             </AdminRoute>
           </PrivateRoute>
         ),

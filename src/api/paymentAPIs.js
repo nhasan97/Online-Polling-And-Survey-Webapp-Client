@@ -5,3 +5,8 @@ export const savePaymentData = async (payment) => {
   const response = await axiosSecure.post("/payments", payment.payment);
   return response.data;
 };
+
+export const getPayments = async () => {
+  const response = await axiosSecure.get("/payments");
+  return response.data;
+};

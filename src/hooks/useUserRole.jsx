@@ -9,13 +9,13 @@ const useUserRole = () => {
     isLoading: roleLoading,
     isFetched,
     data: role,
-    refetch,
+    refetch: refetchRole,
   } = useQuery({
     queryKey: ["getUserRole"],
-    queryFn: () => getRole(user?.email),
+    queryFn: async () => await getRole(user?.email),
   });
 
-  return [role, roleLoading, isFetched, refetch];
+  return [role, roleLoading, isFetched, refetchRole];
 };
 
 export default useUserRole;

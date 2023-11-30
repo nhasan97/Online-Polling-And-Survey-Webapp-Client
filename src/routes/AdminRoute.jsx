@@ -4,9 +4,9 @@ import useUserRole from "../hooks/useUserRole";
 import Loading from "../components/shared/Loading";
 
 const AdminRoute = ({ children }) => {
-  const [role, loading] = useUserRole();
+  const [role, roleLoading] = useUserRole();
 
-  if (loading) {
+  if (roleLoading) {
     return <Loading />;
   }
 

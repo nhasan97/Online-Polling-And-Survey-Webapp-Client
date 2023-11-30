@@ -12,11 +12,16 @@ import useResponse from "../hooks/useResponse";
 import usePerformMutation from "../hooks/usePerformMutation";
 import { saveSurveyPreference } from "../api/prefernceAPIs";
 import usePreference from "../hooks/usePreference";
+import useUserRole from "../hooks/useUserRole";
 
 const SurveyDetails = () => {
   const _id = useParams();
 
   const { user, loading } = useAuth();
+
+  const [role, roleLoading] = useUserRole();
+
+  console.log(role);
 
   const [responses, loadingResponses, isFetched, refetch] = useResponse(_id);
 

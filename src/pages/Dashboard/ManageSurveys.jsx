@@ -14,7 +14,7 @@ import useUserRole from "../../hooks/useUserRole";
 const ManageSurveys = () => {
   const { user, loading } = useAuth();
 
-  const [role, roleLoading, isFetched] = useUserRole();
+  const [role] = useUserRole();
 
   const status = ["Published", "Unpublished"];
 

@@ -17,6 +17,12 @@ const AdminMenu = () => {
       ></SIdebarMenuItem>
 
       <SIdebarMenuItem
+        icon={<i className="fa-solid fa-money-bill"></i>}
+        menuText="Payments"
+        route="/dashboard/payments"
+      ></SIdebarMenuItem>
+
+      <SIdebarMenuItem
         icon={<i className="fa-solid fa-arrow-left"></i>}
         menuText="Back to Site"
         route="/"
