@@ -12,7 +12,6 @@ export const getUsersData = async () => {
 };
 
 export const updateUserRole = async (obj) => {
-  console.log(obj);
   const { data } = await axiosPublic.put(
     `/users/update-role/${obj?.email}`,
     obj?.updatedRole

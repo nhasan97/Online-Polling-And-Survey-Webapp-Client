@@ -87,13 +87,13 @@ const ManageUsers = () => {
                     <button
                       className="btn hover:bg-emerald-400 hover:text-white"
                       onClick={() =>
-                        document.getElementById(user.role).showModal()
+                        document.getElementById(user._id).showModal()
                       }
                     >
                       {user.role}
                     </button>
 
-                    <dialog id={user.role} className="modal">
+                    <dialog id={user._id} className="modal">
                       <div className="modal-box">
                         <form method="dialog">
                           <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">

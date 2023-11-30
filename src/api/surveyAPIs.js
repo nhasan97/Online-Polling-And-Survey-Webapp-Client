@@ -33,3 +33,13 @@ export const getSurvey = async (_id) => {
   const response = await axiosPublic.get(`/surveys/${_id._id}`);
   return response.data;
 };
+
+export const updateSurveyStatus = async (obj) => {
+  console.log(obj);
+  const { data } = await axiosPublic.patch(
+    `/surveys/update-status/${obj?._id}`,
+    obj?.updatedSurvey
+  );
+
+  return data;
+};

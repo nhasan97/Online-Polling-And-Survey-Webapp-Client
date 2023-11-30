@@ -14,6 +14,7 @@ import AdminSurveyorRoute from "./AdminSurveyorRoute";
 import SurveyResponses from "../pages/Dashboard/SurveyResponses";
 import ManageUsers from "../pages/Dashboard/ManageUsers";
 import AdminRoute from "./AdminRoute";
+import ManageSurveys from "../pages/Dashboard/ManageSurveys";
 
 const router = createBrowserRouter([
   {
@@ -82,7 +83,16 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-
+      {
+        path: "manage-surveys",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageSurveys></ManageSurveys>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
       {
         path: "manage-users",
         element: (
