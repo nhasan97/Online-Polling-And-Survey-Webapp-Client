@@ -4,18 +4,30 @@ import { getSingleSurveyPreferences } from "../api/prefernceAPIs";
 const usePreference = (_id) => {
   const {
     isLoading: loadingPreferences,
-    isFetched: isPreferencesFetched,
     data: preferences,
     refetch: preferencesRefetch,
   } = useQuery({
     queryKey: ["getSingleSurveyPreferences"],
     queryFn: () => getSingleSurveyPreferences(_id),
   });
+
+  let filteredLikes = [];
+  let filteredDislikes = [];
+
+  if (!loadingPreferences) {
+    filteredLikes = preferences.filter(
+      (preference) => preference.action === "like"
+    );
+    filteredDislikes = preferences.filter(
+      (preference) => preference.action === "dislike"
+    );
+  }
   return [
     preferences,
     loadingPreferences,
-    isPreferencesFetched,
     preferencesRefetch,
+    filteredLikes,
+    filteredDislikes,
   ];
 };
 

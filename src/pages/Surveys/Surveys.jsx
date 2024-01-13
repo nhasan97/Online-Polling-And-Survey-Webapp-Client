@@ -14,11 +14,7 @@ const Surveys = () => {
   };
   const [surveys, isLoading] = useAllSurveys();
 
-  const {
-    isLoading: loadingVote,
-    data: votes,
-    refetch: voteRefetch,
-  } = useQuery({
+  const { isLoading: loadingVote, data: votes } = useQuery({
     queryKey: ["getVotes"],
     queryFn: getTotalVotes,
   });

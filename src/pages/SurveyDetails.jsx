@@ -7,30 +7,15 @@ import { Helmet } from "react-helmet-async";
 import Title from "../components/shared/Title";
 import Loading from "../components/shared/Loading";
 import timeStampToDateConverter from "../utilities/timeStampToDateConverter";
-import useAuth from "../hooks/useAuth";
 import useResponse from "../hooks/useResponse";
 import usePerformMutation from "../hooks/usePerformMutation";
 import { saveSurveyPreference } from "../api/prefernceAPIs";
 import usePreference from "../hooks/usePreference";
 import useUserRole from "../hooks/useUserRole";
+import { useEffect, useState } from "react";
 
 const SurveyDetails = () => {
   const _id = useParams();
-
-  const { user, loading } = useAuth();
-
-  const [role, roleLoading] = useUserRole();
-
-  console.log(role);
-
-  const [responses, loadingResponses, isFetched, refetch] = useResponse(_id);
-
-  const [
-    preferences,
-    loadingPreferences,
-    isPreferencesFetched,
-    preferencesRefetch,
-  ] = usePreference(_id);
 
   //fetching the data of the particular survey
   const { isLoading, data: survey } = useQuery({
@@ -38,15 +23,40 @@ const SurveyDetails = () => {
     queryFn: () => getSurvey(_id),
   });
 
+  // const { user, loading } = useAuth();
+
+  const [user, loading, role, roleLoading, roleFetched] = useUserRole();
+
+  console.log(role);
+
+  const [responses, loadingResponses, isFetched, refetch] = useResponse(_id);
+
+  const [likes, setLikes] = useState([]);
+  const [dislikes, setDislikes] = useState([]);
+
+  const [
+    preferences,
+    loadingPreferences,
+    preferencesRefetch,
+    filteredLikes,
+    filteredDislikes,
+  ] = usePreference(_id);
+
+  useEffect(() => {
+    setLikes(filteredLikes);
+    setDislikes(filteredDislikes);
+  }, [preferences]);
+
   //==================================== Like/Dislike ====================================
 
   //testing if the person logged in already gave feedback or not
   let feedbackExists;
-  if (isPreferencesFetched) {
+  if (!loadingPreferences) {
     feedbackExists = preferences.find(
       (preference) => preference?.participantsEmail === user?.email
     );
-    console.log(feedbackExists);
+
+    console.log(feedbackExists, likes.length, dislikes.length);
   }
 
   //saving ike/dislike in db
@@ -109,7 +119,13 @@ const SurveyDetails = () => {
     subTitle: "Your thoughts...Our drive | Your voice matters",
   };
 
-  if (isLoading || loading || loadingResponses || loadingPreferences) {
+  if (
+    isLoading ||
+    loading ||
+    loadingResponses ||
+    loadingPreferences ||
+    roleLoading
+  ) {
     return <Loading></Loading>;
   }
 
@@ -151,7 +167,7 @@ const SurveyDetails = () => {
                     onClick={() => handleLikeAndDislike("like")}
                   >
                     <i className="fa-solid fa-thumbs-up"></i>
-                    <span>0</span>
+                    <span>{likes.length}</span>
                   </button>
 
                   <button
@@ -159,7 +175,7 @@ const SurveyDetails = () => {
                     onClick={() => handleLikeAndDislike("dislike")}
                   >
                     <i className="fa-solid fa-thumbs-down"></i>
-                    <span>0</span>
+                    <span>{dislikes.length}</span>
                   </button>
                 </div>
               ) : (
@@ -170,7 +186,7 @@ const SurveyDetails = () => {
                     disabled
                   >
                     <i className="fa-solid fa-thumbs-up"></i>
-                    <span>0</span>
+                    <span>{likes.length}</span>
                   </button>
 
                   <button
@@ -179,7 +195,7 @@ const SurveyDetails = () => {
                     disabled
                   >
                     <i className="fa-solid fa-thumbs-down"></i>
-                    <span>0</span>
+                    <span>{dislikes.length}</span>
                   </button>
                 </div>
               )}
@@ -219,8 +235,10 @@ const SurveyDetails = () => {
                   </div>
                 </div>
 
-                {/* {role === "user" || role === "pro-user" ? ( */}
-                {!alreadyVoted ? (
+                {/* { ( */}
+                {roleFetched &&
+                (role === "user" || role === "pro-user") &&
+                !alreadyVoted ? (
                   <input
                     type="submit"
                     value="Submit"

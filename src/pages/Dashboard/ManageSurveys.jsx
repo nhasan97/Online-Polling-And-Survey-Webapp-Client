@@ -174,6 +174,7 @@ const ManageSurveys = () => {
                                 <i className="fa-solid fa-envelope text-xl text-white"></i>
                               </div>
                               <select
+                                defaultValue={survey.status}
                                 type="text"
                                 name="status"
                                 placeholder="Status"
@@ -187,7 +188,7 @@ const ManageSurveys = () => {
                               </select>
                             </div>
 
-                            <div className="relative">
+                            {/* <div className="relative">
                               <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#7DDDD9] rounded-lg">
                                 <i className="fa-solid fa-envelope text-xl text-white"></i>
                               </div>
@@ -199,7 +200,7 @@ const ManageSurveys = () => {
                                 defaultValue={survey.title}
                                 className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
                               />
-                            </div>
+                            </div> */}
 
                             <input
                               type="submit"

@@ -3,11 +3,11 @@ import { getRole } from "../api/usersAPIs";
 import { useQuery } from "@tanstack/react-query";
 
 const useUserRole = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
   const {
     isLoading: roleLoading,
-    isFetched,
+    isFetched: roleFetched,
     data: role,
     refetch: refetchRole,
   } = useQuery({
@@ -15,7 +15,7 @@ const useUserRole = () => {
     queryFn: async () => await getRole(user?.email),
   });
 
-  return [role, roleLoading, isFetched, refetchRole];
+  return [user, loading, role, roleLoading, roleFetched, refetchRole];
 };
 
 export default useUserRole;

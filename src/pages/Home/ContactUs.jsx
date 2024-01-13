@@ -14,7 +14,7 @@ const ContactUs = () => {
         <title>PanaPoll | Contact Us</title>
       </Helmet>
 
-      <div className="min-h-screen pt-16 pb-5 space-y-6">
+      <div className="min-h-screen flex flex-col justify-center items-center pt-16 pb-5 space-y-6">
         <Title title={title}></Title>
 
         <div className="w-[90%] flex flex-col justify-center items-center px-10 py-5 border rounded-lg">

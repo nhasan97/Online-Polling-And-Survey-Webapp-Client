@@ -118,6 +118,7 @@ const ManageUsers = () => {
                                 <i className="fa-solid fa-user text-xl text-white"></i>
                               </div>
                               <select
+                                defaultValue={user.role}
                                 type="text"
                                 name="role"
                                 placeholder="Role"
