@@ -16,6 +16,9 @@ import { useEffect, useState } from "react";
 import useCurrentDate from "../../hooks/useCurrentDate";
 import dateComparer from "../../utilities/dateComparer";
 import { saveSurveyComment } from "../../api/commentAPIs";
+import useComments from "../../hooks/useComments";
+import { comment } from "postcss";
+import CommentCard from "./commentCard";
 
 const SurveyDetails = () => {
   //setting the title
@@ -42,6 +45,7 @@ const SurveyDetails = () => {
 
   const [likes, setLikes] = useState([]);
   const [dislikes, setDislikes] = useState([]);
+  const [comments, setComments] = useState([]);
 
   const [
     preferences,
@@ -55,6 +59,14 @@ const SurveyDetails = () => {
     setLikes(filteredLikes);
     setDislikes(filteredDislikes);
   }, [preferences]);
+
+  const [loadingComments, fetchedComments, refetchComments] = useComments(_id);
+
+  useEffect(() => {
+    setComments(fetchedComments);
+  }, []);
+
+  console.log(comments);
 
   //==================================== Like/Dislike ====================================
 
@@ -144,7 +156,8 @@ const SurveyDetails = () => {
       timeStamp: Date.now(),
     };
     mutation3.mutate(comment);
-    // refetch();
+    refetchComments();
+    setComments(fetchedComments);
   };
 
   if (
@@ -152,7 +165,8 @@ const SurveyDetails = () => {
     loading ||
     loadingResponses ||
     loadingPreferences ||
-    roleLoading
+    roleLoading ||
+    loadingComments
   ) {
     return <Loading></Loading>;
   }
@@ -304,12 +318,6 @@ const SurveyDetails = () => {
                         <i className="fa-solid fa-paper-plane text-xl"></i>
                       </button>
                     </div>
-
-                    {/* <input
-                      type="submit"
-                      value="Create"
-                      className="btn w-1/2 mx-auto bg-[#FE7E51] text-lg font-medium text-white hover:text-[#FE7E51] normal-case rounded-lg"
-                    /> */}
                   </form>
                 ) : (
                   ""
@@ -323,7 +331,9 @@ const SurveyDetails = () => {
           </div>
 
           <div className="w-[50%] p-6 space-y-4 border rounded-lg">
-            comments
+            {fetchedComments.map((coment) => (
+              <CommentCard key={coment._id} coment={coment}></CommentCard>
+            ))}
           </div>
         </div>
       </div>
