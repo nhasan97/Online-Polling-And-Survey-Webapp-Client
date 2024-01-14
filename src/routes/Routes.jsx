@@ -9,7 +9,6 @@ import DisplaySurveys from "../pages/Dashboard/DisplaySurveys";
 import PrivateRoute from "./PrivateRoute";
 import SurveyorRoute from "./SurveyorRoute";
 import Surveys from "../pages/Surveys/Surveys";
-import SurveyDetails from "../pages/SurveyDetails";
 import AdminSurveyorRoute from "./AdminSurveyorRoute";
 import SurveyResponses from "../pages/Dashboard/SurveyResponses";
 import ManageUsers from "../pages/Dashboard/ManageUsers";
@@ -20,6 +19,7 @@ import ManagePayments from "../pages/Dashboard/ManagePayments";
 import Error from "../pages/Error";
 import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/Home/ContactUs";
+import SurveyDetails from "../pages/SurveyDetails/SurveyDetails";
 
 const router = createBrowserRouter([
   {

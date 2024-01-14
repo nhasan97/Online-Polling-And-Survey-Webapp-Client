@@ -1,20 +1,31 @@
 import { useQuery } from "@tanstack/react-query";
-import { getSurvey } from "../api/surveyAPIs";
-import { saveSurveyResponse } from "../api/responseAPIs";
+import { getSurvey } from "../../api/surveyAPIs";
+import { saveSurveyResponse } from "../../api/responseAPIs";
 import { useParams } from "react-router-dom";
-import Container from "../components/shared/Container";
+import Container from "../../components/shared/Container";
 import { Helmet } from "react-helmet-async";
-import Title from "../components/shared/Title";
-import Loading from "../components/shared/Loading";
-import timeStampToDateConverter from "../utilities/timeStampToDateConverter";
-import useResponse from "../hooks/useResponse";
-import usePerformMutation from "../hooks/usePerformMutation";
-import { saveSurveyPreference } from "../api/prefernceAPIs";
-import usePreference from "../hooks/usePreference";
-import useUserRole from "../hooks/useUserRole";
+import Title from "../../components/shared/Title";
+import Loading from "../../components/shared/Loading";
+import timeStampToDateConverter from "../../utilities/timeStampToDateConverter";
+import useResponse from "../../hooks/useResponse";
+import usePerformMutation from "../../hooks/usePerformMutation";
+import { saveSurveyPreference } from "../../api/prefernceAPIs";
+import usePreference from "../../hooks/usePreference";
+import useUserRole from "../../hooks/useUserRole";
 import { useEffect, useState } from "react";
+import useCurrentDate from "../../hooks/useCurrentDate";
+import dateComparer from "../../utilities/dateComparer";
+import { saveSurveyComment } from "../../api/commentAPIs";
 
 const SurveyDetails = () => {
+  //setting the title
+  const title = {
+    mainTitle: "Survey Details",
+    subTitle: "Your thoughts...Our drive | Your voice matters",
+  };
+
+  const today = useCurrentDate();
+
   const _id = useParams();
 
   //fetching the data of the particular survey
@@ -22,8 +33,6 @@ const SurveyDetails = () => {
     queryKey: ["getSingleSurveyData"],
     queryFn: () => getSurvey(_id),
   });
-
-  // const { user, loading } = useAuth();
 
   const [user, loading, role, roleLoading, roleFetched] = useUserRole();
 
@@ -113,10 +122,29 @@ const SurveyDetails = () => {
     refetch();
   };
 
-  //setting the title
-  const title = {
-    mainTitle: "Survey Details",
-    subTitle: "Your thoughts...Our drive | Your voice matters",
+  //==================================== Comment ====================================
+
+  //saving comment in db
+  const mutation3 = usePerformMutation(
+    "saveComment",
+    saveSurveyComment,
+    "Comment Posted successfully!"
+  );
+
+  const handleComment = (e) => {
+    e.preventDefault();
+
+    const comment = {
+      surveyID: survey?._id || "Not Found",
+      surveyorEmail: survey?.email || "Not Found",
+      commenterName: user?.displayName || "Not Found",
+      commenterEmail: user?.email || "Not Found",
+      commenterImage: user?.photoURL || "Not Found",
+      comment: e.target.comment.value || "Not Found",
+      timeStamp: Date.now(),
+    };
+    mutation3.mutate(comment);
+    // refetch();
   };
 
   if (
@@ -129,6 +157,7 @@ const SurveyDetails = () => {
     return <Loading></Loading>;
   }
 
+  const deadlinePassed = dateComparer(today, survey.deadline);
   return (
     <Container>
       <Helmet>
@@ -201,59 +230,96 @@ const SurveyDetails = () => {
               )}
             </div>
 
-            <fieldset className="w-full p-6 space-y-4 border rounded-lg">
-              <legend className="text-[#8b8b8b] text-base">
-                Let us know your thought
-              </legend>
-              <form onSubmit={handleVote}>
-                <div className="w-full flex ">
-                  <div className="flex-1 flex items-center text-xl">
-                    <input
-                      type="radio"
-                      name="rad"
-                      id="rad1"
-                      value="Yes"
-                      required
-                      className="radio radio-error"
-                    />
-                    <label htmlFor="rad1" className="ml-3">
-                      Yes
-                    </label>
+            {deadlinePassed === "valid" ? (
+              <fieldset className="w-full p-6 space-y-4 border rounded-lg">
+                <legend className="text-[#8b8b8b] text-base">
+                  Let us know your thought
+                </legend>
+                <form onSubmit={handleVote}>
+                  <div className="w-full flex ">
+                    <div className="flex-1 flex items-center text-xl">
+                      <input
+                        type="radio"
+                        name="rad"
+                        id="rad1"
+                        value="Yes"
+                        required
+                        className="radio radio-error"
+                      />
+                      <label htmlFor="rad1" className="ml-3">
+                        Yes
+                      </label>
+                    </div>
+                    <div className="flex-1 flex items-center text-xl">
+                      <input
+                        type="radio"
+                        name="rad"
+                        id="rad2"
+                        value="No"
+                        required
+                        className="radio radio-error"
+                      />
+                      <label htmlFor="rad2" className="ml-3">
+                        No
+                      </label>
+                    </div>
                   </div>
-                  <div className="flex-1 flex items-center text-xl">
-                    <input
-                      type="radio"
-                      name="rad"
-                      id="rad2"
-                      value="No"
-                      required
-                      className="radio radio-error"
-                    />
-                    <label htmlFor="rad2" className="ml-3">
-                      No
-                    </label>
-                  </div>
-                </div>
 
-                {/* { ( */}
-                {roleFetched &&
-                (role === "user" || role === "pro-user") &&
-                !alreadyVoted ? (
-                  <input
-                    type="submit"
-                    value="Submit"
-                    className="w-full btn mt-5 bg-[#FE7E51] hover:bg-white text-lg text-white hover:text-[#FE7E51] border-none"
-                  />
+                  {roleFetched &&
+                  (role === "user" || role === "pro-user") &&
+                  !alreadyVoted ? (
+                    <input
+                      type="submit"
+                      value="Submit"
+                      className="w-full btn mt-5 bg-[#FE7E51] hover:bg-white text-lg text-white hover:text-[#FE7E51] border-none"
+                    />
+                  ) : (
+                    <input
+                      type="submit"
+                      value="Submit"
+                      disabled
+                      className="w-full btn mt-5 bg-[#FE7E51] hover:bg-white text-lg text-white hover:text-[#FE7E51] border-none"
+                    />
+                  )}
+                </form>
+
+                {roleFetched && role === "pro-user" ? (
+                  <form onSubmit={handleComment}>
+                    <div className="relative">
+                      <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#95D0D4] rounded-lg">
+                        <i className="fa-solid fa-comment text-xl text-white"></i>
+                      </div>
+                      <input
+                        type="text"
+                        name="comment"
+                        placeholder="Comment"
+                        required
+                        className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
+                      />
+
+                      <button
+                        type="submit"
+                        className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 right-0 bg-transparent"
+                      >
+                        <i className="fa-solid fa-paper-plane text-xl"></i>
+                      </button>
+                    </div>
+
+                    {/* <input
+                      type="submit"
+                      value="Create"
+                      className="btn w-1/2 mx-auto bg-[#FE7E51] text-lg font-medium text-white hover:text-[#FE7E51] normal-case rounded-lg"
+                    /> */}
+                  </form>
                 ) : (
-                  <input
-                    type="submit"
-                    value="Submit"
-                    disabled
-                    className="w-full btn mt-5 bg-[#FE7E51] hover:bg-white text-lg text-white hover:text-[#FE7E51] border-none"
-                  />
+                  ""
                 )}
-              </form>
-            </fieldset>
+              </fieldset>
+            ) : (
+              <div className="w-full p-6 space-y-4 border border-red-600 rounded-lg">
+                <p className="text-red-600">Survey expired</p>
+              </div>
+            )}
           </div>
 
           <div className="w-[50%] p-6 space-y-4 border rounded-lg">
