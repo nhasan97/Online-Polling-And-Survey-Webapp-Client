@@ -17,7 +17,6 @@ import useCurrentDate from "../../hooks/useCurrentDate";
 import dateComparer from "../../utilities/dateComparer";
 import { saveSurveyComment } from "../../api/commentAPIs";
 import useComments from "../../hooks/useComments";
-import { comment } from "postcss";
 import CommentCard from "./commentCard";
 
 const SurveyDetails = () => {
@@ -45,7 +44,6 @@ const SurveyDetails = () => {
 
   const [likes, setLikes] = useState([]);
   const [dislikes, setDislikes] = useState([]);
-  const [comments, setComments] = useState([]);
 
   const [
     preferences,
@@ -61,12 +59,6 @@ const SurveyDetails = () => {
   }, [preferences]);
 
   const [loadingComments, fetchedComments, refetchComments] = useComments(_id);
-
-  useEffect(() => {
-    setComments(fetchedComments);
-  }, []);
-
-  console.log(comments);
 
   //==================================== Like/Dislike ====================================
 
@@ -157,7 +149,6 @@ const SurveyDetails = () => {
     };
     mutation3.mutate(comment);
     refetchComments();
-    setComments(fetchedComments);
   };
 
   if (
@@ -330,10 +321,13 @@ const SurveyDetails = () => {
             )}
           </div>
 
-          <div className="w-[50%] p-6 space-y-4 border rounded-lg">
-            {fetchedComments.map((coment) => (
-              <CommentCard key={coment._id} coment={coment}></CommentCard>
-            ))}
+          <div className="w-[50%] h-full flex flex-col justify-center items-center gap-6">
+            <div className="w-full p-6 border rounded-lg"></div>
+            <div className="w-full h-[400px] p-6 space-y-4 border rounded-lg overflow-y-auto">
+              {fetchedComments.map((coment) => (
+                <CommentCard key={coment._id} coment={coment}></CommentCard>
+              ))}
+            </div>
           </div>
         </div>
       </div>
