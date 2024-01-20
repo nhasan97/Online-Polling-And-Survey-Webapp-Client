@@ -8,7 +8,7 @@ import AdminMenu from "./AdminMenu";
 
 const Sidebar = () => {
   const { user, logoutUser } = useAuth();
-  const [role] = useUserRole();
+  const [, , role, ,] = useUserRole();
   const [openSidebar, setOpenSidebar] = useState(false);
 
   const handleLogout = () => {

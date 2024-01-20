@@ -4,17 +4,17 @@ import useUserRole from "../hooks/useUserRole";
 import Loading from "../components/shared/Loading";
 
 const SurveyorRoute = ({ children }) => {
-  const [role, roleLoading] = useUserRole();
+  const [user, loading, role, roleLoading] = useUserRole();
 
-  if (roleLoading) {
+  if (roleLoading || loading) {
     return <Loading />;
   }
 
-  if (role === "surveyor") {
+  if (user && role === "surveyor") {
     return children;
   }
 
-  return <Navigate to="/" state={{ from: location }} replace></Navigate>;
+  return <Navigate to="/" state={{ from: location }} replace="true"></Navigate>;
 };
 
 SurveyorRoute.propTypes = {

@@ -4,13 +4,13 @@ import useUserRole from "../hooks/useUserRole";
 import Loading from "../components/shared/Loading";
 
 const AdminRoute = ({ children }) => {
-  const [role, roleLoading] = useUserRole();
+  const [user, loading, role, roleLoading] = useUserRole();
 
-  if (roleLoading) {
+  if (roleLoading || loading) {
     return <Loading />;
   }
 
-  if (role === "admin") {
+  if (user && role === "admin") {
     return children;
   }
 

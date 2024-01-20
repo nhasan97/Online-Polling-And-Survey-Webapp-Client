@@ -11,7 +11,23 @@ const useResponse = (_id) => {
     queryKey: ["getSingleSurveyResponses"],
     queryFn: () => getSingleSurveyResponses(_id),
   });
-  return [responses, loadingResponses, isFetched, refetch];
+
+  let filteredYes = [];
+  let filteredNo = [];
+
+  if (!loadingResponses) {
+    filteredYes = responses.filter((response) => response.vote === "Yes");
+    filteredNo = responses.filter((response) => response.vote === "No");
+  }
+
+  return [
+    responses,
+    loadingResponses,
+    isFetched,
+    refetch,
+    filteredYes,
+    filteredNo,
+  ];
 };
 
 export default useResponse;

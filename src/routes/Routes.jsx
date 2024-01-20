@@ -82,16 +82,6 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "create-survey",
-        element: (
-          <PrivateRoute>
-            <SurveyorRoute>
-              <CreateSurvey></CreateSurvey>
-            </SurveyorRoute>
-          </PrivateRoute>
-        ),
-      },
-      {
         path: "survey-response/:_id",
         element: (
           <PrivateRoute>
