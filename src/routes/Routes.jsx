@@ -20,6 +20,7 @@ import Error from "../pages/Error";
 import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/Home/ContactUs";
 import SurveyDetails from "../pages/SurveyDetails/SurveyDetails";
+import SurveyComments from "../pages/Dashboard/SurveyComments";
 
 const router = createBrowserRouter([
   {
@@ -87,6 +88,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminSurveyorRoute>
               <SurveyResponses></SurveyResponses>
+            </AdminSurveyorRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "survey-comments/:_id",
+        element: (
+          <PrivateRoute>
+            <AdminSurveyorRoute>
+              <SurveyComments></SurveyComments>
             </AdminSurveyorRoute>
           </PrivateRoute>
         ),
