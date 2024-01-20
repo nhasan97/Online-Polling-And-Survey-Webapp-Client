@@ -12,9 +12,9 @@ const ChartBar = ({ yes, no }) => {
     { vote: "Yes", count: yes },
     { vote: "No", count: no },
   ];
-
+  console.log(yes, no);
   return (
-    <ResponsiveContainer width="100%" aspect={0}>
+    <ResponsiveContainer width="100%" aspect={3}>
       <BarChart data={data} width={400} height={400}>
         <XAxis dataKey="vote" />
         <YAxis />

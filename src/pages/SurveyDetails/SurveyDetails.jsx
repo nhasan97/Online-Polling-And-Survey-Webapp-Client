@@ -18,6 +18,7 @@ import dateComparer from "../../utilities/dateComparer";
 import { saveSurveyComment } from "../../api/commentAPIs";
 import useComments from "../../hooks/useComments";
 import CommentCard from "./commentCard";
+import ChartBar from "../../components/shared/ChartBar";
 
 const SurveyDetails = () => {
   //setting the title
@@ -38,9 +39,24 @@ const SurveyDetails = () => {
 
   const [user, loading, role, roleLoading, roleFetched] = useUserRole();
 
-  console.log(role);
+  const [yes, setYes] = useState([]);
+  const [no, setNo] = useState([]);
 
-  const [responses, loadingResponses, isFetched, refetch] = useResponse(_id);
+  const [
+    responses,
+    loadingResponses,
+    isFetched,
+    refetch,
+    filteredYes,
+    filteredNo,
+  ] = useResponse(_id);
+
+  useEffect(() => {
+    setYes(filteredYes);
+    setNo(filteredNo);
+  }, [responses]);
+
+  // console.log(yes.length, no.length);
 
   const [likes, setLikes] = useState([]);
   const [dislikes, setDislikes] = useState([]);
@@ -68,8 +84,6 @@ const SurveyDetails = () => {
     feedbackExists = preferences.find(
       (preference) => preference?.participantsEmail === user?.email
     );
-
-    console.log(feedbackExists, likes.length, dislikes.length);
   }
 
   //saving ike/dislike in db
@@ -322,8 +336,15 @@ const SurveyDetails = () => {
           </div>
 
           <div className="w-[50%] h-full flex flex-col justify-center items-center gap-6">
-            <div className="w-full p-6 border rounded-lg"></div>
-            <div className="w-full h-[400px] p-6 space-y-4 border rounded-lg overflow-y-auto">
+            {/* <div className="w-full p-6 border rounded-lg">
+              <ChartBar yes={yes.length} no={no.length}></ChartBar>
+            </div> */}
+
+            <div className="w-full h-[50%] p-2 border-2 rounded-xl">
+              <ChartBar yes={yes.length} no={no.length}></ChartBar>
+            </div>
+
+            <div className="w-full h-[300px] p-6 space-y-4 border rounded-lg overflow-y-auto">
               {fetchedComments.map((coment) => (
                 <CommentCard key={coment._id} coment={coment}></CommentCard>
               ))}
