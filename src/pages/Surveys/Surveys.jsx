@@ -12,7 +12,7 @@ const Surveys = () => {
     mainTitle: "Surveys",
     subTitle: "Surveys that have taken place so far",
   };
-  const [surveys, isLoading] = useAllSurveys();
+  const [, isLoading, , filteredSurveys] = useAllSurveys();
 
   const { isLoading: loadingVote, data: votes } = useQuery({
     queryKey: ["getVotes"],
@@ -32,7 +32,7 @@ const Surveys = () => {
         <Title title={title}></Title>
 
         <div className="h-[70%] overflow-y-auto grid grid-cols-3 gap-6 my-5">
-          {surveys.map((survey) => (
+          {filteredSurveys.map((survey) => (
             <SurveyCard
               key={survey._id}
               survey={survey}

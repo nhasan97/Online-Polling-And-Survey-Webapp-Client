@@ -10,7 +10,14 @@ const useAllSurveys = () => {
     queryKey: ["getSurveyData"],
     queryFn: getSurveyData,
   });
-  return [surveys, isLoading, refetch];
+
+  let filteredSurveys = [];
+
+  if (!isLoading) {
+    filteredSurveys = surveys.filter((survey) => survey.status === "published");
+  }
+
+  return [surveys, isLoading, refetch, filteredSurveys];
 };
 
 export default useAllSurveys;
