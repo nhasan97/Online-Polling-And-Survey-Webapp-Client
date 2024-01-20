@@ -5,19 +5,34 @@ import { showAlertOnError } from "../../utilities/displaySweetAlert";
 import useAuth from "../../hooks/useAuth";
 import MainLogo from "../shared/mainLogo";
 import Container from "../shared/Container";
+import useUserRole from "../../hooks/useUserRole";
 
 const Navbar = () => {
-  const { user, logoutUser } = useAuth();
+  const { logoutUser } = useAuth();
+
+  const [user, loading, role, roleLoading, , refetchRole] = useUserRole();
+
+  refetchRole();
 
   const links = (
     <div className="text-[#757575] text-base font-medium space-x-8">
       <NavLink to="/">Home</NavLink>
       <NavLink to="/surveys">Surveys</NavLink>
-      <NavLink to="/pro">Pro</NavLink>
+
+      {loading || roleLoading ? (
+        <span className="loading loading-dots loading-xs"></span>
+      ) : user && role === "admin" ? (
+        <NavLink to="/dashboard/manage-surveys">Dashboard</NavLink>
+      ) : user && role === "surveyor" ? (
+        <NavLink to="/dashboard/display-surveys">Dashboard</NavLink>
+      ) : user && role === "user" ? (
+        <NavLink to="/pro">Pro</NavLink>
+      ) : (
+        ""
+      )}
+
       <NavLink to="/about">About Us</NavLink>
       <NavLink to="/contact">Contact</NavLink>
-
-      {user && <NavLink to="/dashboard">Dashboard</NavLink>}
     </div>
   );
 
