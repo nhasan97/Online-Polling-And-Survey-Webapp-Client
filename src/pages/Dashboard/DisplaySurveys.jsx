@@ -284,9 +284,12 @@ const DisplaySurveys = () => {
                       <i className="fa-solid fa-trash group-hover:text-white "></i>
                     </button>
 
-                    <button className="btn hover:bg-[#FE7E51] group">
+                    <Link
+                      to={`/dashboard/survey-comments/${survey._id}`}
+                      className="btn hover:bg-[#FE7E51] group"
+                    >
                       <i className="fa-solid fa-comment group-hover:text-white"></i>
-                    </button>
+                    </Link>
 
                     <Link
                       to={`/dashboard/survey-response/${survey._id}`}
