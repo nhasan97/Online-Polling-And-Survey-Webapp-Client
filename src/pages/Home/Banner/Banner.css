@@ -1,0 +1,37 @@
+.up-down-animation {
+    animation-name: infinitweupdown;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+    transition: all .3s;
+}
+
+.animate-img1 {
+    animation-delay: 0s;
+}
+
+.animate-img2 {
+    animation-delay: 1s;
+}
+
+.animate-img3 {
+    animation-delay: 2s;
+}
+
+.animate-img4 {
+    animation-delay: 3s;
+}
+
+@keyframes infinitweupdown {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
