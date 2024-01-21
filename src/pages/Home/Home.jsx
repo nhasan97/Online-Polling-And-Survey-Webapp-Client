@@ -4,6 +4,7 @@ import ClientReviews from "./ClientsReviews/ClientReviews";
 import HowDoesItWork from "./HowDoesItWork";
 import FAQ from "./FAQ";
 import FeaturedSurveys from "./FeaturedSurveys/FeaturedSurveys";
+import RecentSurveys from "./RecentSurveys/RecentSurveys";
 
 const Home = () => {
   return (
@@ -13,8 +14,9 @@ const Home = () => {
       </Helmet>
 
       <Banner></Banner>
-      <HowDoesItWork></HowDoesItWork>
       <FeaturedSurveys></FeaturedSurveys>
+      <HowDoesItWork></HowDoesItWork>
+      <RecentSurveys></RecentSurveys>
       <ClientReviews></ClientReviews>
       <FAQ></FAQ>
     </div>

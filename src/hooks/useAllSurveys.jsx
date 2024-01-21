@@ -14,7 +14,9 @@ const useAllSurveys = () => {
   let filteredSurveys = [];
 
   if (!isLoading) {
-    filteredSurveys = surveys.filter((survey) => survey.status === "published");
+    filteredSurveys = surveys.filter(
+      (survey) => survey.status === "published" || survey.status === "Published"
+    );
   }
 
   return [surveys, isLoading, refetch, filteredSurveys];
