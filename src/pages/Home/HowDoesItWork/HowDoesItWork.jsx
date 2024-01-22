@@ -1,8 +1,9 @@
-import Container from "../../components/shared/Container";
-import Title from "../../components/shared/Title";
+import Container from "../../../components/shared/Container";
+import Title from "../../../components/shared/Title";
 import { MdKeyboardOptionKey } from "react-icons/md";
 import { MdAdsClick } from "react-icons/md";
-import pic1 from "../../assets/Picture2.png";
+import pic1 from "../../../assets/Picture2.png";
+import "./HowDoesItWork.css";
 
 const HowDoesItWork = () => {
   const title = {
@@ -14,11 +15,11 @@ const HowDoesItWork = () => {
       <div className="w-full flex flex-col justify-center items-center mt-20">
         <Title title={title}></Title>
 
-        <img src={pic1} alt="" className="w-1/2 mx-auto" />
+        <img src={pic1} alt="" className="w-[40%] mx-auto" />
 
         <div className="py-10 grid grid-cols-3 gap-6">
           <div className="flex flex-col justify-start items-center gap-6">
-            <div className="w-20 h-20 flex justify-center items-center text-white bg-[#71357B] rounded-full">
+            <div className="w-20 h-20 flex justify-center items-center text-white bg-[#71357B] rounded-full circle circle1">
               <i className="fa-brands fa-readme text-4xl"></i>
             </div>
             <div className="text-center space-y-6">
@@ -31,7 +32,7 @@ const HowDoesItWork = () => {
           </div>
 
           <div className="flex flex-col justify-start items-center gap-6">
-            <div className="w-20 h-20 flex justify-center items-center text-white bg-[#95D0D4] rounded-full">
+            <div className="w-20 h-20 flex justify-center items-center text-white bg-[#95D0D4] rounded-full circle circle2">
               <MdKeyboardOptionKey className="text-5xl" />
             </div>
             <div className="text-center space-y-6">
@@ -44,7 +45,7 @@ const HowDoesItWork = () => {
           </div>
 
           <div className="flex flex-col justify-start items-center gap-6">
-            <div className="w-20 h-20 flex justify-center items-center text-white bg-[#FE7E51] rounded-full">
+            <div className="w-20 h-20 flex justify-center items-center text-white bg-[#FE7E51] rounded-full circle circle3">
               <MdAdsClick className="text-5xl" />
             </div>
             <div className="text-center space-y-6">

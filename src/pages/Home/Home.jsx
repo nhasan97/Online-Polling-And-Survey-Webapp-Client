@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Banner from "./Banner/Banner";
 import ClientReviews from "./ClientsReviews/ClientReviews";
-import HowDoesItWork from "./HowDoesItWork";
+import HowDoesItWork from "./HowDoesItWork/HowDoesItWork";
 import FAQ from "./FAQ";
 import FeaturedSurveys from "./FeaturedSurveys/FeaturedSurveys";
 import RecentSurveys from "./RecentSurveys/RecentSurveys";
