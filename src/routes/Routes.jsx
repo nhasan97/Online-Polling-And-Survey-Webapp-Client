@@ -18,9 +18,9 @@ import ProPayment from "../pages/ProPayment";
 import ManagePayments from "../pages/Dashboard/ManagePayments";
 import Error from "../pages/Error";
 import AboutUs from "../pages/AboutUs";
-import ContactUs from "../pages/Home/ContactUs";
 import SurveyDetails from "../pages/SurveyDetails/SurveyDetails";
 import SurveyComments from "../pages/Dashboard/SurveyComments";
+import ContactUs from "../pages/ContactUs";
 
 const router = createBrowserRouter([
   {

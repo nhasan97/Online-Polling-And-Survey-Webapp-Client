@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
-import Container from "../../components/shared/Container";
-import Title from "../../components/shared/Title";
+import Container from "../components/shared/Container";
+import Title from "../components/shared/Title";
 
 const ContactUs = () => {
   const title = {

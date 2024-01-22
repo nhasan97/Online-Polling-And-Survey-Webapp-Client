@@ -11,7 +11,7 @@ import "./Banner.css";
 const Banner = () => {
   return (
     <Container>
-      <div className="h-screen flex justify-center items-center">
+      <div className="w-full flex justify-center items-center">
         <div
           className="flex-1 h-full flex flex-col justify-center items-start gap-6"
           data-aos="zoom-in"

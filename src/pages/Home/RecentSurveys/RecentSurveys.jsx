@@ -33,7 +33,7 @@ const RecentSurveys = () => {
   }
   return (
     <Container>
-      <div className="min-h-screen flex flex-col justify-center items-center mt-20">
+      <div className="w-full flex flex-col justify-center items-center mt-20">
         <Title title={title}></Title>
 
         <div className="h-[70%] overflow-y-auto grid grid-cols-4 gap-6 my-5">
