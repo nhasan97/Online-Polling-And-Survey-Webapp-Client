@@ -39,7 +39,7 @@ const ClientReviews = () => {
 
   return (
     <Container>
-      <div className="w-full my-20">
+      <div className="w-full my-32">
         <Title title={title}></Title>
         <div className="py-12">
           <Slider {...settings}>

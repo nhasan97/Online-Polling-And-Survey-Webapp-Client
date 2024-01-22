@@ -12,7 +12,7 @@ const HowDoesItWork = () => {
   };
   return (
     <Container>
-      <div className="w-full flex flex-col justify-center items-center mt-20">
+      <div className="w-full flex flex-col justify-center items-center mt-32">
         <Title title={title}></Title>
 
         <img src={pic1} alt="" className="w-[40%] mx-auto" />

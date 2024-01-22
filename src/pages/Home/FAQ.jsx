@@ -9,7 +9,7 @@ const FAQ = () => {
   };
   return (
     <Container>
-      <div className="w-full flex flex-col justify-center items-center gap-6 mb-20">
+      <div className="w-full flex flex-col justify-center items-center gap-6 mb-32">
         <Title title={title}></Title>
         <div className="flex justify-center items-center gap-6">
           <div className="w-[45%]">
