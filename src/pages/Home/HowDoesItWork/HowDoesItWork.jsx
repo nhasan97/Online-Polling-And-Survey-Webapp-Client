@@ -12,12 +12,12 @@ const HowDoesItWork = () => {
   };
   return (
     <Container>
-      <div className="w-full flex flex-col justify-center items-center mt-32">
+      <div className="w-full flex flex-col justify-center items-center mt-28">
         <Title title={title}></Title>
 
-        <img src={pic1} alt="" className="w-[40%] mx-auto" />
+        <img src={pic1} alt="" className="w-[40%] mx-auto mt-8" />
 
-        <div className="py-10 grid grid-cols-3 gap-6">
+        <div className="py-10 grid grid-cols-3 gap-6 mb-8">
           <div className="flex flex-col justify-start items-center gap-6">
             <div className="w-20 h-20 flex justify-center items-center text-white bg-[#71357B] rounded-full circle circle1">
               <i className="fa-brands fa-readme text-4xl"></i>

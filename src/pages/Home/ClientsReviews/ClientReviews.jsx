@@ -39,9 +39,10 @@ const ClientReviews = () => {
 
   return (
     <Container>
-      <div className="w-full my-32">
+      <div className="w-full mt-28">
         <Title title={title}></Title>
-        <div className="py-12">
+
+        <div className="my-8">
           <Slider {...settings}>
             {reviews.map((review) => (
               <ReviewCard key={review._id} review={review}></ReviewCard>

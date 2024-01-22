@@ -8,7 +8,7 @@ import FeaturedSurveyCard from "./FeaturedSurveyCard";
 const FeaturedSurveys = () => {
   const title = {
     mainTitle: "Featured Surveys",
-    subTitle: "",
+    subTitle: "Most voted surveys",
   };
 
   let survey = [];
@@ -30,10 +30,10 @@ const FeaturedSurveys = () => {
 
   return (
     <Container>
-      <div className="w-full flex flex-col justify-center items-center mt-32">
+      <div className="w-full flex flex-col justify-center items-center mt-28">
         <Title title={title}></Title>
 
-        <div className="h-[70%] overflow-y-auto grid grid-cols-3 gap-6 my-5">
+        <div className="h-[70%] overflow-y-auto grid grid-cols-3 gap-6 my-8">
           {featuredSurveys.map((survey) => (
             <FeaturedSurveyCard
               key={survey._id}

@@ -9,9 +9,9 @@ const FAQ = () => {
   };
   return (
     <Container>
-      <div className="w-full flex flex-col justify-center items-center gap-6 mb-32">
+      <div className="w-full flex flex-col justify-center items-center gap-6 mt-28">
         <Title title={title}></Title>
-        <div className="flex justify-center items-center gap-6">
+        <div className="flex justify-center items-center gap-6 my-8">
           <div className="w-[45%]">
             <img src={faqimg} alt="" className="w-full" />
           </div>
