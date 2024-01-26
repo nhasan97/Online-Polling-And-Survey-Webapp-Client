@@ -11,16 +11,16 @@ import "./Banner.css";
 const Banner = () => {
   return (
     <Container>
-      <div className="w-full flex justify-center items-center">
+      <div className="w-full flex flex-col md:flex-row justify-center items-center md:gap-6">
         <div
-          className="flex-1 h-full flex flex-col justify-center items-start gap-6"
+          className="flex-1 h-full flex flex-col justify-center items-center md:items-start gap-6"
           data-aos="zoom-in"
           data-aos-delay="50"
           data-aos-duration="1000"
           data-aos-easing="ease-in-out"
           data-aos-mirror="true"
         >
-          <h1 className="text-left text-[#101322] text-[50px] font-bold leading-[70px]">
+          <h1 className="text-center md:text-left text-[#101322] text-3xl md:text-[35px] lg:text-[50px] font-bold leading-[40px] md:leading-[45px] lg:leading-[70px]">
             Insights that Empower, Surveys that Deliver. <br />
             Survey with Us Today!
           </h1>
@@ -33,9 +33,8 @@ const Banner = () => {
           </Link>
         </div>
 
-        <div className="flex-1 h-full flex justify-center items-center pt-20">
-          {" "}
-          <div className="bg-[#FE7E51] grid grid-cols-3 gap-6 p-10  rounded-xl">
+        <div className="flex-1 h-full flex justify-center items-center pt-5 md:pt-20">
+          <div className="bg-[#FE7E51] grid grid-cols-3 gap-6 p-5 md:p-10  rounded-xl">
             <img
               src={pic1}
               alt=""
