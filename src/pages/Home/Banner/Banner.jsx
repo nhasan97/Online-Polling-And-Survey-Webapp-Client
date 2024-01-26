@@ -20,7 +20,7 @@ const Banner = () => {
           data-aos-easing="ease-in-out"
           data-aos-mirror="true"
         >
-          <h1 className="text-center md:text-left text-[#101322] text-3xl md:text-[35px] lg:text-[50px] font-bold leading-[40px] md:leading-[45px] lg:leading-[70px]">
+          <h1 className="text-center md:text-left text-[#101322] text-3xl md:text-[40px] lg:text-[50px] font-bold leading-[40px] md:leading-[55px] lg:leading-[70px]">
             Insights that Empower, Surveys that Deliver. <br />
             Survey with Us Today!
           </h1>
