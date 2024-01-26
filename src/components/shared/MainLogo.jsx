@@ -6,7 +6,7 @@ const MainLogo = ({ caller }) => {
     <a
       href="/"
       className={`w-fit flex ${
-        caller === "d" ? "justify-center" : "justify-start"
+        caller === "d" ? "justify-center" : "justify-start hidden md:flex"
       } items-center text-2xl`}
     >
       <img src={logo} alt="" className="w-[10%] mr-2" />

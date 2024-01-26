@@ -14,13 +14,13 @@ const Home = () => {
         <title>PanaPoll | Home</title>
       </Helmet>
 
-      <Banner></Banner>
+      {/* <Banner></Banner>
       <FeaturedSurveys></FeaturedSurveys>
       <RecentSurveys></RecentSurveys>
       <OverView></OverView>
       <HowDoesItWork></HowDoesItWork>
       <ClientReviews></ClientReviews>
-      <FAQ></FAQ>
+      <FAQ></FAQ> */}
     </div>
   );
 };

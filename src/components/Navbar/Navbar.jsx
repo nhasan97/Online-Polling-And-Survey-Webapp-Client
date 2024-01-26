@@ -15,7 +15,7 @@ const Navbar = () => {
   refetchRole();
 
   const links = (
-    <div className="text-[#757575] text-base font-medium space-x-8">
+    <div className="text-[#757575] text-base font-medium lg:space-x-8 flex flex-col lg:flex-row gap-2">
       <NavLink to="/">Home</NavLink>
       <NavLink to="/surveys">Surveys</NavLink>
 
@@ -68,7 +68,7 @@ const Navbar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                className="w-24 menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box"
               >
                 {links}
               </ul>
@@ -82,12 +82,17 @@ const Navbar = () => {
           <div className="navbar-end">
             {user?.email ? (
               <div className="flex justify-center items-center gap-2">
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <label
+                  tabIndex={0}
+                  className="btn btn-ghost btn-circle avatar hidden md:flex"
+                >
                   <div className="w-10 rounded-full">
                     <img src={user.photoURL} />
                   </div>
                 </label>
-                <p className="border-l-2 p-2 text-lg">{user.displayName}</p>
+                <p className="border-r-2 md:border-l-2 md:border-r-0 p-2 text-lg">
+                  {user.displayName}
+                </p>
                 <button
                   className="btn btn-circle border-none bg-[#95D0D4] text-white hover:text-[#323484]"
                   onClick={handleLogout}
