@@ -11,12 +11,12 @@ const FAQ = () => {
     <Container>
       <div className="w-full flex flex-col justify-center items-center gap-6 mt-28">
         <Title title={title}></Title>
-        <div className="flex justify-center items-center gap-6 my-8">
-          <div className="w-[45%]">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-6 my-8">
+          <div className="w-full md:w-[45%]">
             <img src={faqimg} alt="" className="w-full" />
           </div>
 
-          <div className="w-[55%] space-y-6">
+          <div className="w-full md:w-[55%] space-y-6">
             <div className="collapse collapse-arrow bg-[#101322] text-white">
               <input type="radio" name="my-accordion-2" checked="checked" />
               <div className="collapse-title text-xl font-medium">
