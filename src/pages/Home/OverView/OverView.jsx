@@ -31,32 +31,36 @@ const OverView = () => {
         <div className="w-full grid grid-cols-3 mb-8">
           <div className="flex flex-col items-center justify-center gap-3 text-white border-r border-white">
             <h1
-              className="text-8xl font-bold border-b-2 border-white num"
+              className="text-3xl md:text-5xl lg:text-8xl font-bold border-b-2 border-white num"
               data-val="6"
             >
               6
             </h1>
-            <p className="text-2xl font-medium">Voters</p>
+            <p className="text-lg md:text-xl lg:text-2xl font-medium">Voters</p>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-3 text-white">
             <h1
-              className="text-8xl font-bold border-b-2 border-white num"
+              className="text-3xl md:text-5xl lg:text-8xl font-bold border-b-2 border-white num"
               data-val="2"
             >
               2
             </h1>
-            <p className="text-2xl font-medium">Surveyors</p>
+            <p className="text-lg md:text-xl lg:text-2xl font-medium">
+              Surveyors
+            </p>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-3 text-white border-l border-white">
             <h1
-              className="text-8xl font-bold border-b-2 border-white num"
+              className="text-3xl md:text-5xl lg:text-8xl font-bold border-b-2 border-white num"
               data-val="13"
             >
               {filteredSurveys.length}
             </h1>
-            <p className="text-2xl font-medium">Surveys</p>
+            <p className="text-lg md:text-xl lg:text-2xl font-medium">
+              Surveys
+            </p>
           </div>
         </div>
       </div>
