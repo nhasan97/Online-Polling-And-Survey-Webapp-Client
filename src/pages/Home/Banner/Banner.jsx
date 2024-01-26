@@ -11,7 +11,7 @@ import "./Banner.css";
 const Banner = () => {
   return (
     <Container>
-      <div className="w-full flex flex-col md:flex-row justify-center items-center md:gap-6">
+      <div className="w-full flex flex-col md:flex-row justify-center items-center gap-6 md:gap-3 lg:gap-0 pt-24">
         <div
           className="flex-1 h-full flex flex-col justify-center items-center md:items-start gap-6"
           data-aos="zoom-in"
@@ -33,8 +33,8 @@ const Banner = () => {
           </Link>
         </div>
 
-        <div className="flex-1 h-full flex justify-center items-center pt-5 md:pt-20">
-          <div className="bg-[#FE7E51] grid grid-cols-3 gap-6 p-5 md:p-10  rounded-xl">
+        <div className="flex-1 h-full flex justify-center items-center">
+          <div className="bg-[#FE7E51] grid grid-cols-3 gap-6 p-5 lg:p-10 rounded-xl">
             <img
               src={pic1}
               alt=""
