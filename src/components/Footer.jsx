@@ -1,23 +1,18 @@
 import moment from "moment";
-import Container from "./shared/Container";
 import MainLogo from "./shared/mainLogo";
 
 const Footer = () => {
   const year = moment().format("YYYY");
 
   return (
-    <div className="w-full h-fit bg-[#101322] p-4">
-      <Container>
-        <footer className="flex justify-between items-center text-neutral-content">
-          <div className="w-[20%]">
-            <MainLogo caller="f"></MainLogo>
-          </div>
+    <div className="w-full h-fit bg-[#101322] p-8">
+      <footer className="flex flex-col justify-center items-center text-neutral-content">
+        <div className="w-fit p-6 border-b border-white">
+          <MainLogo caller="d"></MainLogo>
+        </div>
 
-          <p className="w-[60%] text-center">
-            {`Copyright © ${year} - All right reserved`}
-          </p>
-
-          <nav className="w-[20%] flex justify-end items-center gap-3">
+        <div className="flex justify-between items-center">
+          <nav className="w-[50%] flex justify-center items-center gap-3">
             <a>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -52,8 +47,12 @@ const Footer = () => {
               </svg>
             </a>
           </nav>
-        </footer>
-      </Container>
+
+          <p className="w-[50%] text-center  p-4 border-l border-white">
+            {`Copyright © ${year} - All right reserved`}
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
