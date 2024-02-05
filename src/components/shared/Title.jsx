@@ -8,7 +8,7 @@ const Title = ({ title }) => {
       <h1 className="text-center text-[#101322] text-2xl md:text-3xl lg:text-4xl font-bold ">
         {mainTitle}
       </h1>
-      <img src={underline} alt="" className="w-full md:w-1/4" />
+      <img src={underline} alt="" className="w-1/2 sm:w-1/4" />
       <p className="text-center text-[#727272] text-base md:text-xl ">
         {subTitle}
       </p>

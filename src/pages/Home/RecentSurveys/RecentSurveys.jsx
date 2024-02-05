@@ -36,7 +36,7 @@ const RecentSurveys = () => {
       <div className="w-full flex flex-col justify-center items-center mt-28">
         <Title title={title}></Title>
 
-        <div className="h-[70%] overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-8">
+        <div className="h-[70%] overflow-y-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-8">
           {recentSurveys.map((survey) => (
             <RecentSurveyCard
               key={survey._id}

@@ -25,7 +25,7 @@ const OverView = () => {
       <div className="bg-[#FE7E51] w-full flex flex-col justify-center items-center mt-28 rounded-xl">
         {/* <Title title={title}></Title> */}
 
-        <h1 className="text-left text-white text-2xl md:text-3xl lg:text-4xl font-bold my-8">
+        <h1 className="text-left text-white text-2xl sm:text-3xl lg:text-4xl font-bold my-8">
           Overview
         </h1>
         <div className="w-full grid grid-cols-3 mb-8">
