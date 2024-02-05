@@ -31,7 +31,7 @@ const Surveys = () => {
       <div className="h-screen pt-16 pb-5">
         <Title title={title}></Title>
 
-        <div className="h-[70%] overflow-y-auto grid grid-cols-3 gap-6 my-5">
+        <div className="h-[70%] overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-5">
           {filteredSurveys.map((survey) => (
             <SurveyCard
               key={survey._id}

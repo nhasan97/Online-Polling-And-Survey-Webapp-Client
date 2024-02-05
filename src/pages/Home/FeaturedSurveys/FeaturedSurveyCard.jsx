@@ -8,7 +8,9 @@ const FeaturedSurveyCard = ({ survey }) => {
     <div className="overflow-hidden rounded-2xl border">
       <div className="card bg-base-100 featured-card relative">
         <div className="card-body items-start">
-          <h2 className="card-title text-[#71357B] text-2xl">{title}</h2>
+          <h2 className="card-title text-[#71357B] text-lg md:text-xl lg:text-2xl">
+            {title}
+          </h2>
           <div className="badge bg-[#95D0D4] text-white text-base font-medium">
             {category}
           </div>
