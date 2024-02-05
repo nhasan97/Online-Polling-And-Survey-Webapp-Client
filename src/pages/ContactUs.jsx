@@ -17,7 +17,7 @@ const ContactUs = () => {
       <div className="min-h-screen flex flex-col justify-center items-center pt-16 pb-5 space-y-6">
         <Title title={title}></Title>
 
-        <div className="w-[90%] flex flex-col justify-center items-center px-10 py-5 border rounded-lg">
+        <div className="w-[90%] flex flex-col justify-center items-center px-2 py-2 md:px-10 md:py-5 border rounded-lg">
           <form className="w-full flex flex-col gap-4 text-left">
             <div className="relative">
               <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#95D0D4] rounded-lg">

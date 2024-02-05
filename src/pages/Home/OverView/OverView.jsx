@@ -25,7 +25,7 @@ const OverView = () => {
       <div className="bg-[#FE7E51] w-full flex flex-col justify-center items-center mt-28 rounded-xl">
         {/* <Title title={title}></Title> */}
 
-        <h1 className="text-left text-white text-4xl font-bold my-8">
+        <h1 className="text-left text-white text-2xl md:text-3xl lg:text-4xl font-bold my-8">
           Overview
         </h1>
         <div className="w-full grid grid-cols-3 mb-8">
@@ -36,7 +36,9 @@ const OverView = () => {
             >
               6
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl font-medium">Voters</p>
+            <p className="text-base md:text-xl lg:text-2xl font-medium">
+              Voters
+            </p>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-3 text-white">
@@ -46,7 +48,7 @@ const OverView = () => {
             >
               2
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl font-medium">
+            <p className="text-base md:text-xl lg:text-2xl font-medium">
               Surveyors
             </p>
           </div>
@@ -58,7 +60,7 @@ const OverView = () => {
             >
               {filteredSurveys.length}
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl font-medium">
+            <p className="text-base md:text-xl lg:text-2xl font-medium">
               Surveys
             </p>
           </div>

@@ -13,13 +13,12 @@ const RecentSurveyCard = ({ survey }) => {
     >
       <Link to={`/survey-detail/${_id}`}>
         <div className="card-body items-start">
-          <h2 className="card-title text-white text-2xl">{title}</h2>
+          <h2 className="card-title text-white text-lg md:text-xl lg:text-2xl">
+            {title}
+          </h2>
           <div className="badge bg-transparent text-white text-base font-medium">
             {category}
           </div>
-          {/* <p className="text-preview text-[#8b8b8b]" title={description}>
-            {description}
-          </p> */}
         </div>
       </Link>
     </div>
