@@ -238,7 +238,13 @@ const ManageSurveys = () => {
       </div>
     );
   } else {
-    <NoData text={"No Survey Found"}></NoData>;
+    return (
+      <div className="h-screen">
+        <DashboardContainer>
+          <NoData text="No Survey Found"></NoData>
+        </DashboardContainer>
+      </div>
+    );
   }
 };
 
