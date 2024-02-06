@@ -19,6 +19,7 @@ import { saveSurveyComment } from "../../api/commentAPIs";
 import useComments from "../../hooks/useComments";
 import CommentCard from "./commentCard";
 import ChartBar from "../../components/shared/ChartBar";
+import ChartPie from "../../components/shared/ChartPie";
 
 const SurveyDetails = () => {
   //setting the title
@@ -183,12 +184,13 @@ const SurveyDetails = () => {
         <title>PanaPoll | Survey Details</title>
       </Helmet>
 
-      <div className="min-h-screen pt-16 pb-5 ">
+      <div className="pt-10 sm:pt-20 pb-5 ">
         <Title title={title}></Title>
-        <div className="flex justify-center items-center gap-6 my-10">
-          <div className="w-[50%] flex flex-col justify-center items-center gap-6">
-            <div className="w-full p-6 space-y-4 border rounded-lg">
-              <h2 className="card-title text-[#71357B] text-2xl">
+
+        <div className="w-full flex flex-col items-center  gap-6 my-10">
+          <div className="w-full flex flex-col sm:flex-row justify-center items-center gap-6 p-3 md:p-6 border rounded-lg">
+            <div className="w-full sm:w-1/2 lg:w-[60%] space-y-4">
+              <h2 className="card-title text-[#71357B] text-lg md:text-xl lg:text-2xl">
                 {survey?.title}
               </h2>
               <div className="badge bg-[#95D0D4] text-white text-base font-medium">
@@ -198,12 +200,12 @@ const SurveyDetails = () => {
                 {survey?.description}
               </p>
 
-              <h3 className="text-[#8b8b8b] text-justify">
+              <h3 className="text-[#8b8b8b] text-base text-justify">
                 <span className="text-[#101322] font-medium">Created On: </span>
                 {timeStampToDateConverter(survey?.timeStamp)}
               </h3>
 
-              <h3 className="text-[#8b8b8b] text-justify">
+              <h3 className="text-[#8b8b8b] text-base text-justify">
                 <span className="text-[#101322] font-medium">Expires On: </span>
                 {survey?.deadline}
               </h3>
@@ -211,7 +213,7 @@ const SurveyDetails = () => {
               {!feedbackExists ? (
                 <div className="join">
                   <button
-                    className="btn join-item text-xl w-full"
+                    className="btn p-2 md:p-4 md:join-item text-base md:text-xl w-full"
                     onClick={() => handleLikeAndDislike("like")}
                   >
                     <i className="fa-solid fa-thumbs-up"></i>
@@ -219,7 +221,7 @@ const SurveyDetails = () => {
                   </button>
 
                   <button
-                    className="btn join-item text-xl w-full"
+                    className="btn p-2 md:p-4 md:join-item text-base md:text-xl w-full"
                     onClick={() => handleLikeAndDislike("dislike")}
                   >
                     <i className="fa-solid fa-thumbs-down"></i>
@@ -229,7 +231,7 @@ const SurveyDetails = () => {
               ) : (
                 <div className="join">
                   <button
-                    className="btn join-item text-xl w-full"
+                    className="btn p-2 md:p-4 md:join-item text-base md:text-xl w-full"
                     onClick={() => handleLikeAndDislike("like")}
                     disabled
                   >
@@ -238,7 +240,7 @@ const SurveyDetails = () => {
                   </button>
 
                   <button
-                    className="btn join-item text-xl w-full"
+                    className="btn p-2 md:p-4 md:join-item text-base md:text-xl w-full"
                     onClick={() => handleLikeAndDislike("dislike")}
                     disabled
                   >
@@ -250,13 +252,13 @@ const SurveyDetails = () => {
             </div>
 
             {deadlinePassed === "valid" ? (
-              <fieldset className="w-full p-6 space-y-4 border rounded-lg">
+              <fieldset className="w-full sm:w-1/2 lg:w-[40%] p-3 md:p-6 space-y-4 border rounded-lg">
                 <legend className="text-[#8b8b8b] text-base">
                   Let us know your thought
                 </legend>
                 <form onSubmit={handleVote}>
                   <div className="w-full flex ">
-                    <div className="flex-1 flex items-center text-xl">
+                    <div className="flex-1 flex items-center text-base md:text-xl">
                       <input
                         type="radio"
                         name="rad"
@@ -269,7 +271,7 @@ const SurveyDetails = () => {
                         Yes
                       </label>
                     </div>
-                    <div className="flex-1 flex items-center text-xl">
+                    <div className="flex-1 flex items-center text-base md:text-xl">
                       <input
                         type="radio"
                         name="rad"
@@ -329,26 +331,39 @@ const SurveyDetails = () => {
                 )}
               </fieldset>
             ) : (
-              <div className="w-full p-6 space-y-4 border border-red-600 rounded-lg">
+              <div className="w-full sm:w-1/2 lg:w-[40%] p-3 md:p-6 space-y-4 border border-red-600 rounded-lg">
                 <p className="text-red-600">Survey expired</p>
               </div>
             )}
           </div>
 
-          <div className="w-[50%] h-full flex flex-col justify-center items-center gap-6">
-            {/* <div className="w-full p-6 border rounded-lg">
-              <ChartBar yes={yes.length} no={no.length}></ChartBar>
-            </div> */}
+          <button
+            className="btn bg-[#FE7E51] hover:bg-white text-lg text-white hover:text-[#FE7E51] border-none"
+            onClick={() => document.getElementById("my_modal_1").showModal()}
+          >
+            See Results
+          </button>
 
-            <div className="w-full h-[50%] p-2 border-2 rounded-xl">
-              <ChartBar yes={yes.length} no={no.length}></ChartBar>
+          <dialog id="my_modal_1" className="modal">
+            <div className="modal-box">
+              <div className="w-full h-screen flex flex-col justify-center items-center gap-6">
+                <div className="w-full h-full sm:p-2 border rounded-xl">
+                  <ChartBar yes={yes.length} no={no.length}></ChartBar>
+                </div>
+                <div className="w-full h-full sm:p-2 border rounded-xl">
+                  <ChartPie yes={yes.length} no={no.length}></ChartPie>
+                </div>
+              </div>
             </div>
+            <form method="dialog" className="modal-backdrop">
+              <button>close</button>
+            </form>
+          </dialog>
 
-            <div className="w-full h-[300px] p-6 space-y-4 border rounded-lg overflow-y-auto">
-              {fetchedComments.map((coment) => (
-                <CommentCard key={coment._id} coment={coment}></CommentCard>
-              ))}
-            </div>
+          <div className="w-full h-[400px] sm:p-3 md:p-6 space-y-4 rounded-lg overflow-y-auto border">
+            {fetchedComments.map((coment) => (
+              <CommentCard key={coment._id} coment={coment}></CommentCard>
+            ))}
           </div>
         </div>
       </div>

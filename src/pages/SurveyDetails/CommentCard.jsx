@@ -3,7 +3,7 @@ import timeStampToDateConverter from "../../utilities/timeStampToDateConverter";
 const CommentCard = ({ coment }) => {
   const { commenterName, commenterImage, comment, timeStamp } = coment;
   return (
-    <div className="w-full flex items-center p-3 gap-3 border rounded-full">
+    <div className="w-full flex items-center p-3 gap-3 border-b sm:border sm:rounded-full">
       <div>
         <img
           src={commenterImage}
