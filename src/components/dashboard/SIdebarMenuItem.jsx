@@ -5,7 +5,7 @@ const SIdebarMenuItem = ({ icon, menuText, route }) => {
   return (
     <NavLink
       to={route}
-      className="flex justify-center items-center gap-3 p-2 text-lg hover:text-[#71357B] transition duration-150"
+      className="flex justify-center items-center gap-3 p-2 text-base sm:text-lg hover:text-[#71357B] transition duration-150"
     >
       {icon}
       {menuText}
