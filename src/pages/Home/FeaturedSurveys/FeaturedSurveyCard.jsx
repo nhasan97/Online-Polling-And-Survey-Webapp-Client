@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./FeaturedSurveyCard.css";
 
@@ -30,6 +31,10 @@ const FeaturedSurveyCard = ({ survey }) => {
       </div>
     </div>
   );
+};
+
+FeaturedSurveyCard.propTypes = {
+  survey: PropTypes.object.isRequired,
 };
 
 export default FeaturedSurveyCard;

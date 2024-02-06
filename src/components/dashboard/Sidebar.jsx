@@ -23,14 +23,14 @@ const Sidebar = () => {
   return (
     <div>
       <div
-        className="flex justify-end items-center p-5 md:hidden"
+        className="w-full flex justify-end items-center p-5 lg:hidden fixed"
         onClick={() => setOpenSidebar(!openSidebar)}
       >
         <HiMenuAlt3 className="text-2xl text-[#101322]" />
       </div>
       {/* bg-[#F2F2F2] */}
       <div
-        className={`w-64 min-h-screen bg-[url(../public/sidebarBg.png)] bg-no-repeat bg-center bg-cover rounded-r-[36px] absolute md:fixed z-10 md:translate-x-0 ${
+        className={`w-64 h-full bg-[url(../public/sidebarBg.png)] bg-no-repeat bg-center bg-cover rounded-r-[36px] overflow-y-auto absolute lg:fixed z-10 lg:translate-x-0 ${
           openSidebar
             ? `translate-x-0 transition duration-300 ease-in-out`
             : `-translate-x-full transition duration-300 ease-in-out`

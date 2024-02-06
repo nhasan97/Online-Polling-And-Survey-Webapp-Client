@@ -1,7 +1,8 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const RecentSurveyCard = ({ survey }) => {
-  const { _id, title, description, category } = survey;
+  const { _id, title, category } = survey;
   return (
     <div
       className="card bg-[#95D0D4] hover:bg-[#7cbabe] shadow-xl"
@@ -23,6 +24,10 @@ const RecentSurveyCard = ({ survey }) => {
       </Link>
     </div>
   );
+};
+
+RecentSurveyCard.propTypes = {
+  survey: PropTypes.object.isRequired,
 };
 
 export default RecentSurveyCard;
