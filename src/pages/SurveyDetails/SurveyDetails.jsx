@@ -20,6 +20,7 @@ import useComments from "../../hooks/useComments";
 import CommentCard from "./commentCard";
 import ChartBar from "../../components/shared/ChartBar";
 import ChartPie from "../../components/shared/ChartPie";
+import NoData from "../../components/shared/NoData";
 
 const SurveyDetails = () => {
   //setting the title
@@ -364,9 +365,13 @@ const SurveyDetails = () => {
             <h2 className="card-title text-[#71357B] text-lg md:text-xl lg:text-2xl p-3 sm:p-0">
               Comments
             </h2>
-            {fetchedComments.map((coment) => (
-              <CommentCard key={coment._id} coment={coment}></CommentCard>
-            ))}
+            {fetchedComments > 0 ? (
+              fetchedComments.map((coment) => (
+                <CommentCard key={coment._id} coment={coment}></CommentCard>
+              ))
+            ) : (
+              <NoData text="No comments"></NoData>
+            )}
           </div>
         </div>
       </div>
