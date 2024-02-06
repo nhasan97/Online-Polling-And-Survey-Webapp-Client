@@ -91,11 +91,13 @@ const SurveyResponses = () => {
       </div>
     );
   } else {
-    <div className="h-screen">
-      <DashboardContainer>
-        <NoData text="No responses available"></NoData>
-      </DashboardContainer>
-    </div>;
+    return (
+      <div className="h-screen">
+        <DashboardContainer>
+          <NoData text="No responses available"></NoData>
+        </DashboardContainer>
+      </div>
+    );
   }
 };
 
