@@ -23,7 +23,7 @@ const Sidebar = () => {
   return (
     <div>
       <div
-        className="w-full flex justify-end items-center p-5 lg:hidden fixed"
+        className="w-full flex justify-end items-center p-5 lg:hidden fixed z-20"
         onClick={() => setOpenSidebar(!openSidebar)}
       >
         <HiMenuAlt3 className="text-2xl text-[#101322]" />

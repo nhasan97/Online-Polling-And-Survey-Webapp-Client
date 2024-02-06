@@ -24,26 +24,30 @@ const SurveyComments = () => {
 
   if (fetchedComments.length > 0) {
     return (
-      <DashboardContainer>
-        <Helmet>
-          <title>PanaPoll | Survey Comments</title>
-        </Helmet>
+      <div className="h-screen border border-red-500">
+        <DashboardContainer>
+          <Helmet>
+            <title>PanaPoll | Survey Comments</title>
+          </Helmet>
 
-        <div className="h-screen pt-16 pb-5">
-          <Title title={title}></Title>
-          <div className="w-full h-[80%] flex flex-col justify-start items-center gap-6 p-6 overflow-y-auto border rounded-xl">
-            {fetchedComments.map((coment) => (
-              <CommentCard key={coment._id} coment={coment}></CommentCard>
-            ))}
+          <div className="w-full h-full flex flex-col justify-center items-center">
+            <Title title={title}></Title>
+            <div className="w-full h-[80%] sm:p-3 space-y-3 overflow-y-auto border rounded-xl">
+              {fetchedComments.map((coment) => (
+                <CommentCard key={coment._id} coment={coment}></CommentCard>
+              ))}
+            </div>
           </div>
-        </div>
-      </DashboardContainer>
+        </DashboardContainer>
+      </div>
     );
   } else {
     return (
-      <DashboardContainer>
-        <NoData text="No Comments"></NoData>
-      </DashboardContainer>
+      <div className="h-screen">
+        <DashboardContainer>
+          <NoData text="No Comments"></NoData>
+        </DashboardContainer>
+      </div>
     );
   }
 };
