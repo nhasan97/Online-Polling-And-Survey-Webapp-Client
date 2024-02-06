@@ -361,6 +361,9 @@ const SurveyDetails = () => {
           </dialog>
 
           <div className="w-full h-[400px] sm:p-3 md:p-6 space-y-4 rounded-lg overflow-y-auto border">
+            <h2 className="card-title text-[#71357B] text-lg md:text-xl lg:text-2xl p-3 sm:p-0">
+              Comments
+            </h2>
             {fetchedComments.map((coment) => (
               <CommentCard key={coment._id} coment={coment}></CommentCard>
             ))}
