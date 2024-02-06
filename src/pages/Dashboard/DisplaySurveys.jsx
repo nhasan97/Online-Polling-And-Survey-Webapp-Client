@@ -16,6 +16,8 @@ import usePerformMutation from "../../hooks/usePerformMutation";
 import Title from "../../components/shared/Title";
 import { Link } from "react-router-dom";
 import NoData from "../../components/shared/NoData";
+import { BiCategory } from "react-icons/bi";
+import { MdOutlineDescription, MdTopic } from "react-icons/md";
 
 const DisplaySurveys = () => {
   const { user, loading } = useAuth();
@@ -211,8 +213,8 @@ const DisplaySurveys = () => {
                               />
 
                               <div className="relative">
-                                <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#7DDDD9] rounded-lg">
-                                  <i className="fa-solid fa-envelope text-xl text-white"></i>
+                                <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#95D0D4] rounded-lg">
+                                  <MdTopic className="text-2xl text-white" />
                                 </div>
                                 <input
                                   type="text"
@@ -220,13 +222,13 @@ const DisplaySurveys = () => {
                                   placeholder="Title"
                                   required
                                   defaultValue={survey.title}
-                                  className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
+                                  className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#95D0D4] focus:outline-none"
                                 />
                               </div>
 
                               <div className="relative">
-                                <div className="h-20 w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#7DDDD9] rounded-lg">
-                                  <i className="fa-solid fa-envelope text-xl text-white"></i>
+                                <div className="h-20 w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#95D0D4] rounded-lg">
+                                  <MdOutlineDescription className="text-2xl text-white"></MdOutlineDescription>
                                 </div>
                                 <textarea
                                   type="email"
@@ -234,20 +236,20 @@ const DisplaySurveys = () => {
                                   placeholder="Description"
                                   required
                                   defaultValue={survey.description}
-                                  className="input bg-[#a1dada41] w-full h-20 pl-16 py-3 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
+                                  className="input bg-[#a1dada41] w-full h-20 pl-16 py-3 rounded-lg border focus:border-[#95D0D4] focus:outline-none"
                                 />
                               </div>
 
                               <div className="relative">
-                                <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#7DDDD9] rounded-lg">
-                                  <i className="fa-solid fa-envelope text-xl text-white"></i>
+                                <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#95D0D4] rounded-lg">
+                                  <BiCategory className="text-2xl text-white" />
                                 </div>
                                 <select
                                   type="text"
                                   name="category"
                                   placeholder="Category"
                                   required
-                                  className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
+                                  className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#95D0D4] focus:outline-none"
                                 >
                                   {categories.map((category) => (
                                     <option key={category}>{category}</option>
@@ -256,7 +258,7 @@ const DisplaySurveys = () => {
                               </div>
 
                               <div className="relative">
-                                <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#7DDDD9] rounded-lg">
+                                <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#95D0D4] rounded-lg">
                                   <i className="fa-regular fa-calendar-days text-xl text-white"></i>
                                 </div>
                                 <input
@@ -266,14 +268,14 @@ const DisplaySurveys = () => {
                                   placeholder="Deadline"
                                   required
                                   defaultValue={survey.deadline}
-                                  className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
+                                  className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#95D0D4] focus:outline-none"
                                 />
                               </div>
 
                               <input
                                 type="submit"
                                 value="Update"
-                                className="btn w-1/2 mx-auto bg-[#101322] text-lg font-medium text-white hover:text-[#323484] normal-case rounded-lg"
+                                className="btn w-1/2 mx-auto bg-[#FE7E51] text-lg font-medium text-white hover:text-[#101322] normal-case rounded-lg"
                               />
                             </form>
                           </div>
