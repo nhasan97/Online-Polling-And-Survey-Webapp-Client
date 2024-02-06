@@ -26,45 +26,53 @@ const ManagePayments = () => {
 
   if (payments.length > 0) {
     return (
-      <DashboardContainer>
-        <Helmet>
-          <title>PanaPoll | Dashboard | Manage Payments</title>
-        </Helmet>
+      <div className="h-screen">
+        <DashboardContainer>
+          <Helmet>
+            <title>PanaPoll | Dashboard | Manage Payments</title>
+          </Helmet>
 
-        <Title title={title}></Title>
+          <Title title={title}></Title>
 
-        <div className="w-[90%] overflow-y-auto h-[400px] rounded-lg">
-          <table className="w-full table table-zebra rounded-lg text-base text-center">
-            {/* head */}
-            <thead className=" bg-[#71357B] text-base text-white font-normal text-center">
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Paid</th>
-                <th>Transaction ID</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* row  */}
-              {payments.map((payment) => (
-                <tr key={payment._id}>
-                  <th className="text-[#71357B] text-left">{payment.name}</th>
-
-                  <td>{payment.email}</td>
-                  <td>{payment.price}</td>
-                  <td>{payment.transactionID}</td>
-
-                  <td>{timeStampToDateConverter(payment.timeStamp)}</td>
+          <div className="w-full sm:w-[90%] h-[80%] overflow-y-auto rounded-lg border">
+            <table className="w-full table table-zebra rounded-lg text-base text-center">
+              {/* head */}
+              <thead className=" bg-[#71357B] text-base text-white font-normal text-center">
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Paid</th>
+                  <th>Transaction ID</th>
+                  <th>Date</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </DashboardContainer>
+              </thead>
+              <tbody>
+                {/* row  */}
+                {payments.map((payment) => (
+                  <tr key={payment._id}>
+                    <th className="text-[#71357B] text-left">{payment.name}</th>
+
+                    <td>{payment.email}</td>
+                    <td>{payment.price}</td>
+                    <td>{payment.transactionID}</td>
+
+                    <td>{timeStampToDateConverter(payment.timeStamp)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </DashboardContainer>
+      </div>
     );
   } else {
-    <NoData text={"No Users Found"}></NoData>;
+    return (
+      <div className="h-screen">
+        <DashboardContainer>
+          <NoData text="No Payment Found"></NoData>
+        </DashboardContainer>
+      </div>
+    );
   }
 };
 
