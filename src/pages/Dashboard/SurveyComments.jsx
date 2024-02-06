@@ -24,7 +24,7 @@ const SurveyComments = () => {
 
   if (fetchedComments.length > 0) {
     return (
-      <div className="h-screen border border-red-500">
+      <div className="h-screen">
         <DashboardContainer>
           <Helmet>
             <title>PanaPoll | Survey Comments</title>

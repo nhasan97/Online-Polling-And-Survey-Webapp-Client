@@ -48,7 +48,7 @@ const ChartPie = ({ yes, no }) => {
         <PieChart
           width={`100%`}
           height={`100%`}
-          className="text-base md:text-3xl font-bold"
+          className="text-sm sm:text-xl font-bold"
         >
           <Legend verticalAlign="bottom" align="center" />
           <Pie

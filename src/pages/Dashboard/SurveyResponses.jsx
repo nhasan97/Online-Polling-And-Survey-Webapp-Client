@@ -24,14 +24,11 @@ const SurveyResponses = () => {
     setNo(filteredNo);
   }, [responses]);
 
-  console.log(yes, no);
   //setting the title
   const title = {
     mainTitle: "Survey Responses",
     subTitle: "",
   };
-
-  const text = "No responses available";
 
   if (loadingResponses) {
     return <Loading></Loading>;
@@ -39,20 +36,30 @@ const SurveyResponses = () => {
 
   if (responses.length > 0) {
     return (
-      <DashboardContainer>
-        <Helmet>
-          <title>PanaPoll | Dashboard | Responses</title>
-        </Helmet>
+      <div className="h-screen">
+        <DashboardContainer>
+          <Helmet>
+            <title>PanaPoll | Dashboard | Responses</title>
+          </Helmet>
 
-        <Title title={title}></Title>
-        <div className="w-full flex h-screen justify-center items-center gap-6">
-          <div className="w-[50%] h-full border-2 rounded-xl">
-            <div className="overflow-y-auto rounded-lg">
+          <div className="w-full h-full flex flex-col justify-center items-center gap-3">
+            <Title title={title}></Title>
+
+            <div className="w-full h-[50%] flex flex-col sm:flex-row justify-center items-center gap-3">
+              <div className="w-full sm:w-[50%] h-[50%] sm:h-full p-2 border rounded-xl">
+                <ChartBar yes={yes.length} no={no.length}></ChartBar>
+              </div>
+              <div className="w-full sm:w-[50%] h-[50%] sm:h-full sm:p-2 border rounded-xl">
+                <ChartPie yes={yes.length} no={no.length}></ChartPie>
+              </div>
+            </div>
+
+            <div className="w-full h-[50%] overflow-y-auto rounded-lg border">
               <table className="w-full table table-zebra rounded-lg text-base text-center">
                 {/* head */}
                 <thead className=" bg-[#71357B] text-base text-white font-normal text-center">
                   <tr>
-                    <th>Participants Name</th>
+                    <th>Name</th>
                     {/* <th>Email</th> */}
                     <th>Time</th>
                     <th>Voted</th>
@@ -62,9 +69,7 @@ const SurveyResponses = () => {
                   {/* row  */}
                   {responses.map((response) => (
                     <tr key={response._id}>
-                      <th className="text-[#71357B] text-left">
-                        {response.votersName}
-                      </th>
+                      <th className="text-[#71357B]">{response.votersName}</th>
                       {/* <td>{response.votersEmail}</td> */}
                       <td>{timeStampToDateConverter(response.timeStamp)}</td>
                       <td
@@ -82,20 +87,15 @@ const SurveyResponses = () => {
               </table>
             </div>
           </div>
-
-          <div className="w-[50%] h-full flex flex-col justify-center items-center gap-6">
-            <div className="w-full h-[50%] p-2 border-2 rounded-xl">
-              <ChartBar yes={yes.length} no={no.length}></ChartBar>
-            </div>
-            <div className="w-full h-[50%] p-2 border-2 rounded-xl">
-              <ChartPie yes={yes.length} no={no.length}></ChartPie>
-            </div>
-          </div>
-        </div>
-      </DashboardContainer>
+        </DashboardContainer>
+      </div>
     );
   } else {
-    <NoData text={text}></NoData>;
+    <div className="h-screen">
+      <DashboardContainer>
+        <NoData text="No responses available"></NoData>
+      </DashboardContainer>
+    </div>;
   }
 };
 
