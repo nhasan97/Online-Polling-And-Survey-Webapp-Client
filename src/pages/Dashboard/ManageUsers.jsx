@@ -65,7 +65,7 @@ const ManageUsers = () => {
 
           <Title title={title}></Title>
 
-          <div className="w-full sm:w-[90%] h-[80%] overflow-y-auto rounded-lg border">
+          <div className="hidden sm:block w-full sm:w-[90%] h-[80%] overflow-y-auto rounded-lg border">
             <table className="w-full table table-zebra rounded-lg text-base text-center">
               {/* head */}
               <thead className=" bg-[#71357B] text-base text-white font-normal text-center">
@@ -148,6 +148,83 @@ const ManageUsers = () => {
                 ))}
               </tbody>
             </table>
+          </div>
+
+          <div className="grid grid-cols-1 gap-3 sm:hidden w-full h-[80%] overflow-y-auto rounded-lg">
+            {users.map((user) => (
+              <div key={user._id} className="card bg-base-100 shadow-xl">
+                <div className="card-body p-5">
+                  <h2 className="card-title text-[#71357B] text-lg md:text-xl lg:text-2xl">
+                    {user.name}
+                  </h2>
+                  <p className="text-base flex items-center justify-start gap-2">
+                    <i className="fa-solid fa-envelope"></i> {user.email}
+                  </p>
+                  <p className="text-base flex items-center justify-start gap-2">
+                    <span className="font-bold">Joined On | </span>
+                    {timeStampToDateConverter(user.timeStamp)}
+                  </p>
+                  <div className="card-actions justify-center">
+                    <button
+                      className="w-full btn hover:bg-emerald-400 hover:text-white"
+                      onClick={() =>
+                        document.getElementById("c" + user._id).showModal()
+                      }
+                    >
+                      {user.role}
+                    </button>
+
+                    <dialog id={"c" + user._id} className="modal">
+                      <div className="modal-box">
+                        <form method="dialog">
+                          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                            ✕
+                          </button>
+                        </form>
+                        <div className="p-5">
+                          <form
+                            className="w-full flex flex-col gap-4 text-left"
+                            onSubmit={handleUserRole}
+                          >
+                            <input
+                              type="text"
+                              name="email"
+                              required
+                              hidden
+                              defaultValue={user.email}
+                            />
+
+                            <div className="relative">
+                              <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#95D0D4] rounded-lg">
+                                <i className="fa-solid fa-user text-xl text-white"></i>
+                              </div>
+                              <select
+                                defaultValue={user.role}
+                                type="text"
+                                name="role"
+                                placeholder="Role"
+                                required
+                                className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
+                              >
+                                {roles.map((role) => (
+                                  <option key={role}>{role}</option>
+                                ))}
+                              </select>
+                            </div>
+
+                            <input
+                              type="submit"
+                              value="Update"
+                              className="btn w-1/2 mx-auto bg-[#FE7E51] text-lg font-medium text-white hover:text-[#FE7E51] normal-case rounded-lg"
+                            />
+                          </form>
+                        </div>
+                      </div>
+                    </dialog>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </DashboardContainer>
       </div>
