@@ -102,10 +102,10 @@ const CreateSurvey = () => {
           <img
             src={pic2}
             alt=""
-            className="w-1/3 lg:hidden absolute top-0 sm:-top-20 left-0 z-0 opacity-[.5]"
+            className="w-1/3 lg:hidden absolute top-0 sm:-top-20 left-0 z-[-1] opacity-[.5]"
           />
           <form
-            className="bg-[#e7e7e72a] w-full flex flex-col gap-4 p-2 text-left backdrop-blur-[2px] z-10"
+            className="bg-[#e7e7e72a] w-full flex flex-col gap-4 p-2 text-left backdrop-blur-[2px]"
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="relative">
@@ -174,7 +174,7 @@ const CreateSurvey = () => {
           <img
             src={pic1}
             alt=""
-            className="w-1/3 lg:hidden absolute bottom-0 sm:-bottom-20 right-0 z-0 opacity-[.5]"
+            className="w-1/3 lg:hidden absolute bottom-0 sm:-bottom-20 right-0 z-[-1] opacity-[.5]"
           />
         </div>
       </DashboardContainer>

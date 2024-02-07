@@ -4,7 +4,7 @@ import underline from "../../assets/Picture1.png";
 const Title = ({ title }) => {
   const { mainTitle, subTitle } = title;
   return (
-    <div className="flex flex-col justify-center items-center gap-2 my-3 z-10">
+    <div className="flex flex-col justify-center items-center gap-2 my-3">
       <h1 className="text-center text-[#101322] text-2xl md:text-3xl lg:text-4xl font-bold ">
         {mainTitle}
       </h1>
