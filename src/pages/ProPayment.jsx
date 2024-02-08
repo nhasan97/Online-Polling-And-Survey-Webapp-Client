@@ -20,30 +20,31 @@ const ProPayment = () => {
         <title>PanaPoll | Become PRO</title>
       </Helmet>
 
-      <div className="min-h-screen pt-16 pb-5 space-y-6">
+      <div className="min-h-screen flex flex-col justify-center items-center pt-16 pb-5 space-y-6">
         <Title title={title}></Title>
 
-        <div className="flex justify-between items-center px-20 py-5 bg-[#71357B] text-white rounded-lg">
+        <div className="w-full h-1/4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-6 px-5 lg:px-20 py-5 bg-[#71357B] text-white rounded-lg">
           <div>
-            <p className="text-2xl mb-6">Pro user Plan</p>
-            <h1 className="text-3xl">
-              Only <span className="text-5xl font-semibold">$14</span> / One
-              time payment
+            <p className="text-xl lg:text-2xl mb-6">Pro user Plan</p>
+            <h1 className="text-2xl lg:text-3xl">
+              Only
+              <span className="text-4xl lg:text-5xl font-semibold">$14</span> /
+              One time payment
             </h1>
           </div>
-          <div className="text-lg">
+          <div className="text-base lg:text-lg">
             <ul>
-              <p className="text-2xl mb-6">You will enjoy</p>
-              <li className="text-lg mb-2">
+              <p className="text-xl lg:text-2xl mb-3 lg:mb-6">You will enjoy</p>
+              <li className="mb-2">
                 <i className="fa-solid fa-check"></i> Participate in any survey
               </li>
-              <li className="text-lg mb-2">
+              <li className="mb-2">
                 <i className="fa-solid fa-check"></i> Like/Dislike survey
               </li>
-              <li className="text-lg mb-2">
+              <li className="mb-2">
                 <i className="fa-solid fa-check"></i> Comment in any survey
               </li>
-              <li className="text-lg mb-2">
+              <li className="mb-2">
                 <i className="fa-solid fa-check"></i> Report survey
               </li>
             </ul>

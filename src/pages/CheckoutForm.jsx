@@ -110,7 +110,7 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div className="px-20 py-5 bg-[#a1dada41] rounded-lg">
+    <div className="w-full h-1/4 px-5 sm:px-20 py-5 bg-[#a1dada41] rounded-lg">
       <form onSubmit={handleSubmit} className="">
         <CardElement
           options={{
