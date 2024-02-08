@@ -158,10 +158,13 @@ const ManageUsers = () => {
                     {user.name}
                   </h2>
                   <p className="text-base flex items-center justify-start gap-2">
-                    <i className="fa-solid fa-envelope"></i> {user.email}
+                    <i className="fa-solid fa-envelope text-[#95D0D4]"></i>
+                    {user.email}
                   </p>
                   <p className="text-base flex items-center justify-start gap-2">
-                    <span className="font-bold">Joined On | </span>
+                    <span className="font-bold text-[#e4744b]">
+                      Joined On |
+                    </span>
                     {timeStampToDateConverter(user.timeStamp)}
                   </p>
                   <div className="card-actions justify-center">
