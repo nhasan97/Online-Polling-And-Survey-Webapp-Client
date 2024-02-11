@@ -32,7 +32,7 @@ const Register = () => {
         .then(async (result) => {
           updateUsersProfile(data.name, imageData?.data?.display_url)
             .then(async () => {
-              const dbResponse = await saveUserData(result?.user);
+              const dbResponse = await saveUserData(result?.user, data.role);
               console.log(dbResponse);
               reset();
               showAlertOnSuccess("Account created successfully");
@@ -51,13 +51,19 @@ const Register = () => {
   };
 
   //================== Register using Google ==================
-  const handleRegistrationWithGoogle = () => {
+  const handleRegistrationWithGoogle = (e) => {
+    e.preventDefault();
+    console.log(e.target.role.value);
+
     const provider = new GoogleAuthProvider();
 
     signInWithGoogle(provider)
       .then(async (result) => {
         if (result?.user?.email) {
-          const dbResponse = await saveUserData(result?.user);
+          const dbResponse = await saveUserData(
+            result?.user,
+            e.target.role.value
+          );
           console.log(dbResponse);
           navigate(location?.state ? location.state : "/");
         }
@@ -174,9 +180,43 @@ const Register = () => {
               <input
                 type="file"
                 {...register("photo")}
+                required
                 className="file-input file-input-bordered w-full"
               />
             </div>
+
+            <fieldset className="w-full p-2 space-y-2 border rounded-lg">
+              <legend className="text-[#8b8b8b] text-base">
+                Choose your role
+              </legend>
+
+              <div className="w-full flex">
+                <div className="flex-1 flex items-center text-base">
+                  <input
+                    type="radio"
+                    {...register("role", { required: true })}
+                    value="user"
+                    required
+                    className="radio radio-error"
+                  />
+                  <label htmlFor="rad1" className="ml-3">
+                    User
+                  </label>
+                </div>
+                <div className="flex-1 flex items-center text-base">
+                  <input
+                    type="radio"
+                    {...register("role", { required: true })}
+                    value="surveyor"
+                    required
+                    className="radio radio-error"
+                  />
+                  <label htmlFor="rad2" className="ml-3">
+                    Surveyor
+                  </label>
+                </div>
+              </div>
+            </fieldset>
 
             <input
               type="submit"
@@ -193,10 +233,65 @@ const Register = () => {
             </p>
             <p className="text-sm sm:text-lg font-medium">Or sign in with</p>
 
-            <BiLogoGoogle
+            {/* <BiLogoGoogle
               className="btn w-1/2 mx-auto bg-[#FE7E51] text-sm sm:text-lg font-medium text-white hover:text-[#FE7E51] normal-case rounded-lg"
               onClick={handleRegistrationWithGoogle}
+            ></BiLogoGoogle> */}
+            <BiLogoGoogle
+              className="btn w-1/2 mx-auto bg-[#FE7E51] text-sm sm:text-lg font-medium text-white hover:text-[#FE7E51] normal-case rounded-lg"
+              onClick={() => document.getElementById("my_modal_1").showModal()}
             ></BiLogoGoogle>
+
+            <dialog id="my_modal_1" className="modal">
+              <div className="modal-box">
+                <form onSubmit={handleRegistrationWithGoogle}>
+                  <fieldset className="w-full p-2 space-y-2 border rounded-lg">
+                    <legend className="text-[#8b8b8b] text-base">
+                      Choose your role
+                    </legend>
+
+                    <div className="w-full flex">
+                      <div className="flex-1 flex items-center text-base">
+                        <input
+                          type="radio"
+                          name="role"
+                          value="user"
+                          required
+                          className="radio radio-error"
+                        />
+                        <label htmlFor="rad1" className="ml-3">
+                          User
+                        </label>
+                      </div>
+                      <div className="flex-1 flex items-center text-base">
+                        <input
+                          type="radio"
+                          name="role"
+                          value="surveyor"
+                          required
+                          className="radio radio-error"
+                        />
+                        <label htmlFor="rad2" className="ml-3">
+                          Surveyor
+                        </label>
+                      </div>
+                    </div>
+
+                    <input
+                      type="submit"
+                      value="Sign Up with Google"
+                      className="btn w-1/2 mx-auto bg-[#FE7E51] text-lg font-medium text-white hover:text-[#FE7E51] normal-case rounded-lg"
+                    />
+                  </fieldset>
+                </form>
+                <div className="modal-action">
+                  <form method="dialog">
+                    {/* if there is a button in form, it will close the modal */}
+                    <button className="btn">Close</button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
           </div>
         </div>
 
