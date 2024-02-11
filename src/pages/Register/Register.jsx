@@ -69,20 +69,20 @@ const Register = () => {
 
   return (
     <div className="h-screen">
-      <div className="hidden lg:flex w-full h-full flex-row justify-center items-center bg-[url('../public/reg-bg3.png')] bg-center bg-no-repeat bg-cover">
+      <div className="w-full h-full sm:flex lg:flex-row sm:justify-center sm:items-center bg-[url('../public/reg-bg.png')] sm:bg-[url('../public/reg-bg2.png')] lg:bg-[url('../public/reg-bg3.png')] bg-center bg-no-repeat bg-cover">
         <div
-          className="w-[50%] h-full bg-[rgba(255,255,255,0.92)] flex flex-col justify-center items-center gap-4 rounded-r-[80px] shadow-xl shadow-[rgba(41,38,38,0.71)]"
-          data-aos="fade-right"
+          className="w-full sm:w-[60%] lg:w-[50%] h-fit lg:h-full bg-[rgba(255,255,255,0.92)] flex flex-col justify-center items-center gap-4 px-10 py-6 sm:p-10 lg:px-0 lg:py-0 space-y-4 lg:space-y-0 rounded-b-[80px] sm:rounded-[60px] lg:rounded-r-[80px] lg:rounded-l-none shadow-xl shadow-[rgba(41,38,38,0.71)]"
+          data-aos="fade-down"
           data-aos-delay="10"
           data-aos-duration="1000"
           data-aos-easing="ease-in-out"
           data-aos-mirror="false"
         >
           <form
-            className="w-1/2 h-fit flex flex-col gap-3 px-0 text-left"
+            className="w-full lg:w-3/4 h-fit flex flex-col gap-4 sm:gap-3 lg:gap-4 px-0 text-left"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <h1 className="text-[#444] text-4xl font-semibold text-center">
+            <h1 className="text-[#444] text-4xl font-semibold text-center mt-4 sm:mt-0">
               Sign UP
             </h1>
 
@@ -184,23 +184,23 @@ const Register = () => {
               className="btn w-1/2 mx-auto bg-[#FE7E51] text-lg font-medium text-white hover:text-[#FE7E51] normal-case rounded-lg"
             />
           </form>
-          <div className="w-1/2 h-fit flex flex-col items-center gap-4 px-0">
-            <p className="text-lg text-[#444] text-center">
+          <div className="w-full lg:w-3/4 h-fit flex flex-col items-center gap-4 px-0">
+            <p className="text-sm sm:text-lg text-[#444] text-center">
               Already registered?
               <Link className="font-bold" to="/login">
                 Go to log in
               </Link>
             </p>
-            <p className="text-lg font-medium">Or sign in with</p>
+            <p className="text-sm sm:text-lg font-medium">Or sign in with</p>
 
             <BiLogoGoogle
-              className="btn w-1/2 mx-auto bg-[#FE7E51] text-lg font-medium text-white hover:text-[#FE7E51] normal-case rounded-lg"
+              className="btn w-1/2 mx-auto bg-[#FE7E51] text-sm sm:text-lg font-medium text-white hover:text-[#FE7E51] normal-case rounded-lg"
               onClick={handleRegistrationWithGoogle}
             ></BiLogoGoogle>
           </div>
         </div>
 
-        <div className="w-[50%] h-full flex justify-center items-center text-center -mt-60">
+        <div className="hidden lg:flex justify-center items-center w-[50%] h-full text-center -mt-60">
           <p className="text-white">
             <span className="text-[80px] font-bold">
               PanaPoll<br></br>
@@ -213,7 +213,7 @@ const Register = () => {
       </div>
 
       {/* for mobile devices */}
-      <div className="sm:hidden w-full h-full bg-[url('../public/reg-bg.png')] bg-center bg-no-repeat bg-cover">
+      {/* <div className="sm:hidden w-full h-full bg-[url('../public/reg-bg.png')] bg-center bg-no-repeat bg-cover">
         <div
           className="bg-[rgba(255,255,255,0.84)] h-fit rounded-b-[80px] px-10 py-6 space-y-4"
           data-aos="fade-down"
@@ -343,10 +343,10 @@ const Register = () => {
             ></BiLogoGoogle>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* for tablets */}
-      <div className="hidden sm:flex lg:hidden w-full h-full bg-[url('../public/reg-bg2.png')] bg-center bg-no-repeat bg-cover justify-center items-center">
+      {/* <div className="hidden sm:flex lg:hidden w-full h-full bg-[url('../public/reg-bg2.png')] bg-center bg-no-repeat bg-cover justify-center items-center">
         <div
           className="w-[60%] h-fit bg-[rgba(255,255,255,0.73)] flex flex-col justify-center items-center gap-4 p-10 rounded-[60px] shadow-xl shadow-[rgba(41,38,38,0.71)]"
           data-aos="zoom-in"
@@ -476,7 +476,7 @@ const Register = () => {
             ></BiLogoGoogle>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

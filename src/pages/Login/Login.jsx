@@ -50,17 +50,23 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center items-center bg-[url('src/assets/others/authentication.png')]">
-      <div className="max-w-screen-xl mx-auto flex justify-center items-center shadow-xl py-8">
-        <div className="w-full px-10">
+    <div className="h-screen">
+      <div className="w-full h-full sm:flex lg:flex-row sm:justify-center sm:items-center bg-[url('../public/reg-bg.png')] sm:bg-[url('../public/reg-bg2.png')] lg:bg-[url('../public/reg-bg3.png')] bg-center bg-no-repeat bg-cover">
+        <div
+          className="w-full sm:w-[60%] lg:w-[50%] h-fit lg:h-full bg-[rgba(255,255,255,0.92)] flex flex-col justify-center items-center gap-4 px-10 py-20 sm:p-10 lg:px-0 lg:py-0 space-y-4 lg:space-y-0 rounded-b-[80px] sm:rounded-[60px] lg:rounded-r-[80px] lg:rounded-l-none shadow-xl shadow-[rgba(41,38,38,0.71)]"
+          data-aos="fade-down"
+          data-aos-delay="10"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in-out"
+          data-aos-mirror="false"
+        >
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-4 text-left"
+            className="w-full lg:w-3/4 h-fit flex flex-col gap-4 sm:gap-3 lg:gap-4 px-0 text-left"
           >
-            <h1 className="text-[#444] text-[40px] font-semibold text-center">
+            <h1 className="text-[#444] text-4xl font-semibold text-center mt-4 sm:mt-0">
               Login
             </h1>
-
             <div className="relative">
               <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#95D0D4] rounded-lg">
                 <i className="fa-solid fa-envelope text-xl text-white"></i>
@@ -74,7 +80,6 @@ const Login = () => {
                 className="input bg-[#a1dada41] w-full pl-16 rounded-lg border focus:border-[#7DDDD9] focus:outline-none"
               />
             </div>
-
             <div className="relative">
               <div className="h-[48px] w-[48px] flex justify-center items-center absolute top-0 left-0 bg-[#95D0D4] rounded-lg">
                 <i className="fa-solid fa-key text-xl text-white"></i>
@@ -99,7 +104,6 @@ const Login = () => {
                 )}
               </span>
             </div>
-
             <input
               type="submit"
               value="Sign In"
@@ -107,19 +111,30 @@ const Login = () => {
             />
           </form>
 
-          <div className="flex flex-col justify-center items-center gap-4 mt-4">
-            <p className="text-lg text-[#444] text-center">
+          <div className="w-full lg:w-3/4 h-fit flex flex-col items-center gap-4 px-0">
+            <p className="text-sm sm:text-lg text-[#444] text-center">
               New here?
               <Link className="font-bold" to="/register">
                 Create a New Account
               </Link>
             </p>
-            <p className="text-lg font-medium">Or sign in with</p>
+            <p className="text-sm sm:text-lg font-medium">Or sign in with</p>
             <BiLogoGoogle
-              className="btn w-1/2 mx-auto bg-[#FE7E51] text-lg font-medium text-white hover:text-[#FE7E51] normal-case rounded-lg"
+              className="btn w-1/2 mx-auto bg-[#FE7E51] text-sm sm:text-lg font-medium text-white hover:text-[#FE7E51] normal-case rounded-lg"
               onClick={handleLoginWithGoogle}
             ></BiLogoGoogle>
           </div>
+        </div>
+
+        <div className="hidden lg:flex justify-center items-center w-[50%] h-full text-center -mt-60">
+          <p className="text-white">
+            <span className="text-[80px] font-bold">
+              PanaPoll<br></br>
+            </span>
+            <span className="text-xl font-medium tracking-wider">
+              Insights that Empower, Surveys that Deliver.
+            </span>
+          </p>
         </div>
       </div>
     </div>
