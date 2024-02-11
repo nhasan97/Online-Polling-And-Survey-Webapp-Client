@@ -69,8 +69,15 @@ const Register = () => {
 
   return (
     <div className="h-screen">
-      <div className="hidden lg:flex w-full h-full flex-row justify-center items-center bg-[url('public/reg-bg3.png')] bg-center bg-no-repeat bg-cover">
-        <div className="w-[50%] h-full bg-[rgba(255,255,255,0.92)] flex flex-col justify-center items-center gap-4 rounded-r-[80px] shadow-xl shadow-[rgba(41,38,38,0.71)]">
+      <div className="hidden lg:flex w-full h-full flex-row justify-center items-center bg-[url('../public/reg-bg3.png')] bg-center bg-no-repeat bg-cover">
+        <div
+          className="w-[50%] h-full bg-[rgba(255,255,255,0.92)] flex flex-col justify-center items-center gap-4 rounded-r-[80px] shadow-xl shadow-[rgba(41,38,38,0.71)]"
+          data-aos="fade-right"
+          data-aos-delay="10"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in-out"
+          data-aos-mirror="false"
+        >
           <form
             className="w-1/2 h-fit flex flex-col gap-3 px-0 text-left"
             onSubmit={handleSubmit(onSubmit)}
@@ -206,8 +213,15 @@ const Register = () => {
       </div>
 
       {/* for mobile devices */}
-      <div className="sm:hidden w-full h-full bg-[url('public/reg-bg.png')] bg-center bg-no-repeat bg-cover">
-        <div className="bg-[rgba(255,255,255,0.84)] h-fit rounded-b-[80px] px-10 py-6 space-y-4">
+      <div className="sm:hidden w-full h-full bg-[url('../public/reg-bg.png')] bg-center bg-no-repeat bg-cover">
+        <div
+          className="bg-[rgba(255,255,255,0.84)] h-fit rounded-b-[80px] px-10 py-6 space-y-4"
+          data-aos="fade-down"
+          data-aos-delay="10"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in-out"
+          data-aos-mirror="false"
+        >
           <form
             className="w-full h-fit flex flex-col gap-4 text-left"
             onSubmit={handleSubmit(onSubmit)}
@@ -332,8 +346,15 @@ const Register = () => {
       </div>
 
       {/* for tablets */}
-      <div className="hidden sm:flex lg:hidden w-full h-full bg-[url('public/reg-bg2.png')] bg-center bg-no-repeat bg-cover justify-center items-center">
-        <div className="w-[60%] h-fit bg-[rgba(255,255,255,0.73)] flex flex-col justify-center items-center gap-4 p-10 rounded-[60px] shadow-xl shadow-[rgba(41,38,38,0.71)]">
+      <div className="hidden sm:flex lg:hidden w-full h-full bg-[url('../public/reg-bg2.png')] bg-center bg-no-repeat bg-cover justify-center items-center">
+        <div
+          className="w-[60%] h-fit bg-[rgba(255,255,255,0.73)] flex flex-col justify-center items-center gap-4 p-10 rounded-[60px] shadow-xl shadow-[rgba(41,38,38,0.71)]"
+          data-aos="zoom-in"
+          data-aos-delay="10"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in-out"
+          data-aos-mirror="false"
+        >
           <form
             className="w-full h-fit flex flex-col gap-3 px-0 text-left"
             onSubmit={handleSubmit(onSubmit)}
