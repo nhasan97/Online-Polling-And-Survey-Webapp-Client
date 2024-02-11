@@ -26,7 +26,7 @@ const HowDoesItWork = () => {
               <h1 className="text-lg md:text-xl lg:text-2xl font font-medium">
                 Read the details
               </h1>
-              <p>
+              <p className="text-[#8b8b8b]">
                 Each of the surveys contain details that will allow the reader
                 to understand what's it all about and which vote to cast.
               </p>
@@ -41,7 +41,7 @@ const HowDoesItWork = () => {
               <h1 className="text-lg md:text-xl lg:text-2xl font font-medium">
                 Select the option
               </h1>
-              <p>
+              <p className="text-[#8b8b8b]">
                 Each of the surveys has two options - Yes or no. Choose
                 According to your opinion.
               </p>
@@ -56,7 +56,7 @@ const HowDoesItWork = () => {
               <h1 className="text-lg md:text-xl lg:text-2xl font font-medium">
                 Hit Submit
               </h1>
-              <p>
+              <p className="text-[#8b8b8b]">
                 After selecting the option According to your opinion just click
                 submit and your vote will be casted.
               </p>
